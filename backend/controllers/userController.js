@@ -257,7 +257,14 @@ const changePassword = asyncHandler( async (req,res) => {
 
 const forgotPassword = asyncHandler( async (req,res) => {
 
-    res.status(200).send("Sucess");
+    const {email} req.body;
+
+    const user = await User.findOne({email})
+
+    if(!user){
+        res.status(400);
+        throw new Erro("User does not exist")
+    }
 
 });
 
