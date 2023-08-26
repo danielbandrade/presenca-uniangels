@@ -15,6 +15,8 @@ const generateToken = (id) => {
 const registerUser = asyncHandler( async (req, res) => {
     const{name, email, password} = req.body
 
+    console.log("que doidera, cheguei aqui");
+
     //  Validation
     if(!name || !email || !password) {
         res.status(400)
@@ -167,14 +169,14 @@ const getUser = asyncHandler( async (req,res) => {
 const loginStatus = asyncHandler( async (req,res) => {
 
     const token = req.cookies.token
-
+    
     if(!token){
         return res.json(false)
     }
 
     // Verify Token
     const verified = jwt.verify(token, process.env.JWT_SECRET)
-
+    
     if(verified){
         return res.json(true)
     }
@@ -286,6 +288,8 @@ const forgotPassword = asyncHandler( async (req,res) => {
     }).save()
 
     res.send("Forgot Password"); 
+
+    // construct reset url 
 
 });
 

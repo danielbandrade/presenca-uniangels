@@ -22,4 +22,4 @@ router.patch("/updateuser", protect , updateUser);
 router.patch("/changepassword", protect , changePassword);
 router.post("/forgotpassword" , forgotPassword);
 
-module.exports = router 
+module.exports = router; 
