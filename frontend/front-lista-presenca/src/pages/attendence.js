@@ -6,15 +6,23 @@ const inter = Inter({ subsets: ['latin'] })
 
 // TODO : Tem que fazer a consulta get na API e exibir os membros na tela
 
-export default function Attendence(){
 
+
+
+export default function Attendence({ data }){
+
+    console.log(data);
     const router = useRouter();
 
   return (
     <main
-      className={`flex min-h-screen flex-col items-center justify-between p-24 ${inter.className}`}>
+      className={`flex min-h-screen flex-col justify-between p-24 ${inter.className}`}>
       <h1>Estes são os membros</h1>
-        
+      <ul>
+          {data.selectedObjects.map((item, index) => (
+            <li key={index}>Nome:{item.name}, Criado em: {item.createdAt} </li>
+          ))}
+        </ul>
     </main>
   )
 }
@@ -28,6 +36,8 @@ export async function getServerSideProps() {
     console.log(data);
 
     return {
-        data
+        props: {
+            data,
+          },
     };
 }
