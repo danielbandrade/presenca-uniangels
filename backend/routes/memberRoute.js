@@ -7,7 +7,7 @@ const {
     registerMember,
     getMembers, 
 } = require("../controllers/memberController");
-//const protect = require("../middleWare/authMiddleware");
+const protect = require("../middleWare/authMiddleware");
 
 
 router.post("/register", registerMember);

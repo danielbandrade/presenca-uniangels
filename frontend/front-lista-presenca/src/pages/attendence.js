@@ -11,7 +11,6 @@ const inter = Inter({ subsets: ['latin'] })
 
 export default function Attendence({ data }){
 
-    console.log(data);
     const router = useRouter();
 
   return (
@@ -32,8 +31,6 @@ export async function getServerSideProps() {
     
     const response = await fetch('http://localhost:5000/api/members/getmembers');
     const data = await response.json();
-    
-    console.log(data);
 
     return {
         props: {

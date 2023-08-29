@@ -3,6 +3,9 @@ import React, { useState } from 'react';
 import { Inter } from 'next/font/google';
 import { useRouter } from 'next/router';
 
+
+// TODO fazer login encaminhar para ppágina de presença
+
 const inter = Inter({ subsets: ['latin'] })
 
 const Login = () => {
@@ -24,7 +27,7 @@ const Login = () => {
   
         if (response.ok) {
           // Handle successful login response here
-          console.log(response);
+          router.push('/attendence');
         } else {
           // Handle login error response here
           console.log('Login failed!');
@@ -49,6 +52,7 @@ const Login = () => {
           <input
             type="email"
             value={email}
+            style={{ color: 'red', margin: '10px'  }}
             onChange={(e) => setEmail(e.target.value)}
           />
         </div>
@@ -57,6 +61,7 @@ const Login = () => {
           <input
             type="password"
             value={password}
+            style={{ color: 'red', margin: '10px'  }}
             onChange={(e) => setPassword(e.target.value)}
           />
         </div>
