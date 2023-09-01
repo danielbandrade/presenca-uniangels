@@ -4,7 +4,8 @@ import { useRouter } from 'next/router';
 
 const inter = Inter({ subsets: ['latin'] })
 
-// TODO : Tem que fazer a consulta get na API e exibir os membros na tela
+// TODO: fazer a tela de registro de presenca
+// TODO: criar todos os membros no backend
 
 
 

@@ -6,13 +6,12 @@ const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 
 
-// TODO: conseguir criar uma nova presenca
-// parece que o que não funciona é o link com os membros
 
-// Register New Members
 const registerAttendence = asyncHandler( async (req, res) => {
     
     const{name, date, isPresent} = req.body
+
+   
 
     //  Validation
     if(!name && !date &&  !isPresent) {
@@ -28,6 +27,10 @@ const registerAttendence = asyncHandler( async (req, res) => {
         res.status(400)
         throw new Error("Member does not exists")
     };
+
+    // TODO: validar se essa mesma presenca já foi criada 
+
+
     // Create new presence
     
     const memberId = member._id;
@@ -39,9 +42,10 @@ const registerAttendence = asyncHandler( async (req, res) => {
     })
 
     if (attendance){
-        const {_id, date} = attendance 
+        const {_id, date, member} = attendance 
         res.status(201).json({
             _id,
+            member,
             date
         })
 

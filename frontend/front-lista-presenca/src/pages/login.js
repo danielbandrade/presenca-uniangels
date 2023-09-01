@@ -4,7 +4,9 @@ import { Inter } from 'next/font/google';
 import { useRouter } from 'next/router';
 
 
-// TODO fazer login encaminhar para ppágina de presença
+// TODO P1 cadastrar membros do uniangels e fazer POC de preenchimento de presenca
+// TODO P2 fazer login passar o cookie de protecao para página de presenca usando js coockie 
+
 
 const inter = Inter({ subsets: ['latin'] })
 
