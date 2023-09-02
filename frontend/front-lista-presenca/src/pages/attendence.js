@@ -1,6 +1,7 @@
 import Image from 'next/image';
 import { Inter } from 'next/font/google';
 import { useRouter } from 'next/router';
+import React, { useState } from 'react';
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -24,51 +25,62 @@ export async function getServerSideProps() {
 
 
 
-const registerAttendence = () => {
+const registerAttendence = async() => {
   
-  // TODO preciso capturar os dados inseridos na interface e enviar da maneira adequada para o backend
-  // posso começar garantindo que os dados estão chegando na função 
+  // const router = useRouter();
 
-  
+  // TODO fazer o resgistro de presenca funcinar atraves da ligacao com o backend
 
+  console.log("increment like count")
 
-  /*
-  const router = useRouter();
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-
-    
-    try {
-        const response = await fetch('http://localhost:5000/api/attendences/register', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({ email, password }),
-        });
-  
-        if (response.ok) {
-          // Handle successful login response here
-          router.push('/attendence');
-        } else {
-          // Handle login error response here
-          console.log('Login failed!');
+  try {
+    const response = await fetch('http://localhost:5000/api/attendences/register', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(
+        {
+          name: 'Alan',
+          date: '2023-08-31',
+          isPresent: 'true'
         }
-      } catch (error) {
-        // Handle error here
-        console.error('Error:', error);
-      }
-      */
+      ),
+    });
 
-  };
+    if (response.ok) {
+      // Handle successful login response here
+      router.push('/attendence');
+      console.log('registro de presenca funcionou');
+    } else {
+      // Handle login error response here
+      console.log('Registrou de presenca nao funcionou');
+    }
+  } catch (error) {
+    // Handle error here
+    console.error('Error:', error);
+  }
 
+}
 
 
 
 export default function Attendence({ data }){
 
-    const router = useRouter();
+  const router = useRouter();
+  const [selectedItems, setSelectedItems] = useState([]);
+
+  const handleSelectItem = (item) => {  
+  
+    if (selectedItems.includes(item)) {
+      // Item is already selected, so remove it from the selection
+      setSelectedItems(selectedItems.filter((selectedItem) => selectedItem !== item));
+    } else {
+      // Item is not selected, so add it to the selection
+      setSelectedItems([...selectedItems, item]);
+    }
+  
+  }; 
 
   return (
     <main
@@ -78,7 +90,7 @@ export default function Attendence({ data }){
           {data.selectedObjects.map((item, index) => (
             
             <li key={index}>
-              Nome:{item.name}, Criado em: {item.createdAt} 
+              {item.name}, Criado em: {item.createdAt} 
             </li>
           
             
@@ -87,8 +99,7 @@ export default function Attendence({ data }){
 
       <div>
 
-
-      <h2>Multi-Select List</h2>
+      <h2>Esta é a lista de presença dos membros</h2>
       <ul>
         {data.selectedObjects.map((item, index) => (
           <li key={index}>
@@ -96,17 +107,20 @@ export default function Attendence({ data }){
               {item.name}
               <input
                 type="checkbox"
-                value={item}
+                value={item.name}
+                checked={selectedItems.includes(item)}
+                onChange={() => handleSelectItem(item)}
               />
             </label>
           </li>
         ))}
       </ul>
-      <p>Selected Items: </p>
+      <p>Selected Items: {selectedItems.join(', ')}</p>
+
+      
+    <button onClick={registerAttendence}>Registrar Presença</button>     
     </div>      
-
-
-
+    
     </main>
   )
 }
