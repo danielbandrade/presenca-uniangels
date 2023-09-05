@@ -6,7 +6,7 @@ const { format } = require('date-fns');
 // TODO: fazer a tela de registro de presenca
 // TODO: criar todos os membros no backend
 // TODO entender pq a lista dos membros selecionados nao eh exibida
-// TODO ajustar o date time para exibir somente a data
+// TODO criar e usar componente que exibe membros 
 // documentacao css https://v1.tailwindcss.com/components/buttons
 
 
@@ -26,7 +26,7 @@ export async function getServerSideProps() {
 
 
 const registerAttendence = async () => {
-
+  event.preventDefault();
   // const router = useRouter();
 
   // TODO fazer o resgistro de presenca funcinar atraves da ligacao com o backend
@@ -64,8 +64,6 @@ const registerAttendence = async () => {
 
 }
 
-
-
 export default function Attendence({ data }) {
 
   const router = useRouter();
@@ -88,23 +86,23 @@ export default function Attendence({ data }) {
 
       <h1 className=" flex text-1xl font-bold ">Estes são os membros</h1>
 
-      <p>
-        <ul>
-          {data.selectedObjects.map((item, index) => (
+      <ul>
+        {data.selectedObjects.map((item, index) => (
 
-            <li key={index}>
-              <div >{item.name} </div>
+          <li key={index}>
+            <div>
+              {item.name} 
+              <a className=" text-xs" > Criado em: {format(Date.parse(item.createdAt), 'dd/MM/yyyy')} 
+              </a> 
+            </div>
+          </li>
 
-              <div> Criado em: {format(Date.parse(item.createdAt), 'dd/MM/yyyy')} </div>
-            </li>
-
-          ))}
-        </ul>
-      </p>
+        ))}
+      </ul>
 
       <div>
 
-        <h2 className=" my-2 text-1xl font-bold ">Lista de presença dos membros</h2>
+        <h2 className=" my-2 text-1xl font-bold ">Lista de presença dos membros em {format(Date.now(), 'dd/MM/yyyy')}</h2>
         <form className=" my-2">
           <ul>
             {data.selectedObjects.map((item, index) => (
@@ -112,7 +110,7 @@ export default function Attendence({ data }) {
                 <label>
                   {item.name}
                   <input
-                    class="appearance-none border-2  rounded mx-2 py-2 px-2 leading-tight checked:bg-gray-200"
+                    className="appearance-none border-2 rounded mx-2 py-2 px-2 leading-tight checked:bg-red-700"
                     type="checkbox"
                     value={item.name}
                     checked={selectedItems.includes(item)}
@@ -122,10 +120,11 @@ export default function Attendence({ data }) {
               </li>
             ))}
           </ul>
-          <p>Membros presentes: {selectedItems.join(', ')}</p>
+          <p>Membros presentes: {JSON.stringify(selectedItems)}; </p>
+                            
 
 
-          <button class="my-2 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full" onClick={registerAttendence} >Registrar Presença</button>
+          <button className="my-2 bg-red-600 hover:bg-red-800 text-white font-bold py-2 px-4 rounded-full" onClick={registerAttendence} >Registrar Presença</button>
         </form>
       </div>
 
