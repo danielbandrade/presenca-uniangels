@@ -29,17 +29,17 @@ export async function getServerSideProps() {
 export default function Attendence({ data }) {
 
   const router = useRouter();
-  const [selectedItems, setSelectedItems] = useState([]);
+  const [membersAttendence, setSelectedMembers] = useState([]);
 
-  const handleSelectItem = (item) => {
+  const handleSelectItem = (member) => {
 
 
-    if (selectedItems.includes(item)) {
+    if (membersAttendence.includes(member)) {
       // Item is already selected, so remove it from the selection
-      setSelectedItems(selectedItems.filter((selectedItem) => selectedItem !== item));
+      setSelectedMembers(membersAttendence.filter((selectedMember) => selectedMember !== member));
     } else {
       // Item is not selected, so add it to the selection
-      setSelectedItems([...selectedItems, item]);
+      setSelectedMembers([...membersAttendence, member]);
     }
 
   };
@@ -47,58 +47,38 @@ export default function Attendence({ data }) {
   const registerAttendence = async (event) => {
     event.preventDefault();
     // const router = useRouter();
-  
-    // TODO fazer o resgistro de presenca funcinar atraves da ligacao com o backend
-  
-    const registerAttendenceFetch =  selectedItems.map((members) => {
-      
+
       try {
-        const response = fetch('http://localhost:5000/api/attendences/register',
-          {
+          const response = fetch('http://localhost:5000/api/attendences/register',{
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',
             },
-            body: JSON.stringify(
-              {
-                name:  members.name,
-                date: format(Date.now(), 'yyyy-MM-dd'),
-                isPresent: 'true'
-              }
-            ),
-          });
-    
-        if (response.ok) {
-          // Handle successful login response here
-          router.push('/attendence');
-          console.log('registro de presenca funcionou');
-        } else {
-          // Handle login error response here
-          console.log('Registrou de presenca nao funcionou');
-        }
-      } catch (error) {
-        // Handle error here
+            body: members,
+          })
+          
+          if (response.ok) {
+            router.push('/attendence');
+            console.log('registro de presenca funcionou');
+          } else {
+            console.log('Registrou de presenca nao funcionou');
+          }
+        } 
+      catch (error) {
         console.error('Error:', error);
       }
-    
-    });
-  
-  }
-  
-
-
+}
   return (
+    
     <main>
-
       <h1 className=" flex text-1xl font-bold ">Estes são os membros</h1>
-
       <ul>
-        {data.selectedObjects.map((item, index) => (
+        {data.selectedObjects.map((member, index) => (
 
           <li key={index}>
             <div>
-              {item.name} 
-              <a className=" text-xs" > Criado em: {format(Date.parse(item.createdAt), 'dd/MM/yyyy')} 
+              {member.name} 
+              <a className=" text-xs" > Criado em: {format(Date.parse(member.createdAt), 'dd/MM/yyyy')} 
               </a> 
             </div>
           </li>
@@ -111,22 +91,22 @@ export default function Attendence({ data }) {
         <h2 className=" my-2 text-1xl font-bold ">Lista de presença dos membros em {format(Date.now(), 'dd/MM/yyyy')}</h2>
         <form className=" my-2">
           <ul>
-            {data.selectedObjects.map((item, index) => (
+            {data.selectedObjects.map((member, index) => (
               <li key={index}>
                 <label>
-                  {item.name}
+                  {member.name}
                   <input
                     className="appearance-none border-2 rounded mx-2 py-2 px-2 leading-tight checked:bg-red-700"
                     type="checkbox"
-                    value={item.name}
-                    checked={selectedItems.includes(item)}
-                    onChange={() => handleSelectItem(item)}
+                    value={member.name}
+                    checked={membersAttendence.includes(member)}
+                    onChange={() => handleSelectItem(member)}
                   />
                 </label>
               </li>
             ))}
           </ul>
-          <p>Membros presentes: {JSON.stringify(selectedItems)}; </p>
+          <p>Membros presentes: {membersAttendence.map(member => member.name).join(', ')} </p>
                             
 
 
@@ -137,5 +117,3 @@ export default function Attendence({ data }) {
     </main>
   )
 }
-
-
