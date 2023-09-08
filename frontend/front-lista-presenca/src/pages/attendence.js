@@ -25,44 +25,6 @@ export async function getServerSideProps() {
 }
 
 
-const registerAttendence = async () => {
-  event.preventDefault();
-  // const router = useRouter();
-
-  // TODO fazer o resgistro de presenca funcinar atraves da ligacao com o backend
-
-  console.log("increment like count")
-
-  try {
-    const response = await fetch('http://localhost:5000/api/attendences/register',
-      {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(
-          {
-            name: 'Alan',
-            date: '2023-08-31',
-            isPresent: 'true'
-          }
-        ),
-      });
-
-    if (response.ok) {
-      // Handle successful login response here
-      router.push('/attendence');
-      console.log('registro de presenca funcionou');
-    } else {
-      // Handle login error response here
-      console.log('Registrou de presenca nao funcionou');
-    }
-  } catch (error) {
-    // Handle error here
-    console.error('Error:', error);
-  }
-
-}
 
 export default function Attendence({ data }) {
 
@@ -70,6 +32,7 @@ export default function Attendence({ data }) {
   const [selectedItems, setSelectedItems] = useState([]);
 
   const handleSelectItem = (item) => {
+
 
     if (selectedItems.includes(item)) {
       // Item is already selected, so remove it from the selection
@@ -80,6 +43,49 @@ export default function Attendence({ data }) {
     }
 
   };
+
+  const registerAttendence = async (event) => {
+    event.preventDefault();
+    // const router = useRouter();
+  
+    // TODO fazer o resgistro de presenca funcinar atraves da ligacao com o backend
+  
+    const registerAttendenceFetch =  selectedItems.map((members) => {
+      
+      try {
+        const response = fetch('http://localhost:5000/api/attendences/register',
+          {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(
+              {
+                name:  members.name,
+                date: format(Date.now(), 'yyyy-MM-dd'),
+                isPresent: 'true'
+              }
+            ),
+          });
+    
+        if (response.ok) {
+          // Handle successful login response here
+          router.push('/attendence');
+          console.log('registro de presenca funcionou');
+        } else {
+          // Handle login error response here
+          console.log('Registrou de presenca nao funcionou');
+        }
+      } catch (error) {
+        // Handle error here
+        console.error('Error:', error);
+      }
+    
+    });
+  
+  }
+  
+
 
   return (
     <main>
