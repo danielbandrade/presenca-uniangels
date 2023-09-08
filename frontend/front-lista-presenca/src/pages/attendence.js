@@ -3,10 +3,9 @@ import { useRouter } from 'next/router';
 import React, { useState } from 'react';
 const { format } = require('date-fns');
 
-// TODO: fazer a tela de registro de presenca
 // TODO: criar todos os membros no backend
-// TODO entender pq a lista dos membros selecionados nao eh exibida
 // TODO criar e usar componente que exibe membros 
+// TODO refatorar lista de presentes para sempre conter todos os membros e mudar flag de presente 
 // documentacao css https://v1.tailwindcss.com/components/buttons
 
 
@@ -15,38 +14,50 @@ export async function getServerSideProps() {
   // Busca os membros
 
   const response = await fetch('http://localhost:5000/api/members/getmembers');
-  const data = await response.json();
+  const membersList = await response.json();
 
   return {
     props: {
-      data,
+      membersList,
     },
   };
 }
 
 
 
-export default function Attendence({ data }) {
+export default function Attendence({ membersList }) {
 
   const router = useRouter();
   const [membersAttendence, setSelectedMembers] = useState([]);
 
-  const handleSelectItem = (member) => {
+
+  const [membersAttendenceRefactor, setSelectedMembersRefactor] = useState([]);
+  // TODO refatorar lista de presentes para sempre conter todos os membros e mudar flag de presente 
 
 
-    if (membersAttendence.includes(member)) {
+  const handleSelectItem = (selectedMember) => {
+
+    if (membersAttendence.includes(selectedMember)) {
       // Item is already selected, so remove it from the selection
-      setSelectedMembers(membersAttendence.filter((selectedMember) => selectedMember !== member));
+      setSelectedMembers(membersAttendence.filter((member) => member !== selectedMember));
     } else {
       // Item is not selected, so add it to the selection
-      setSelectedMembers([...membersAttendence, member]);
+      setSelectedMembers([...membersAttendence, selectedMember]);
     }
 
+    const newAttendenceHandle = membersList.selectedObjects.map( member => {
+      // colocar membersAttendenceRefactor aqui e inserir variável de presenca (flag) de acordo com itens selecionados
+      if (selectedMember === member ) {
+        console.log(member)
+        return {... member} }
+      else{
+        return console.log("que doidera")
+      }
+    })
   };
 
   const registerAttendence = async (event) => {
     event.preventDefault();
-    // const router = useRouter();
 
       try {
           const response = fetch('http://localhost:5000/api/attendences/register',{
@@ -54,7 +65,7 @@ export default function Attendence({ data }) {
             headers: {
               'Content-Type': 'application/json',
             },
-            body: members,
+            body: JSON.stringify(membersAttendence),
           })
           
           if (response.ok) {
@@ -73,7 +84,7 @@ export default function Attendence({ data }) {
     <main>
       <h1 className=" flex text-1xl font-bold ">Estes são os membros</h1>
       <ul>
-        {data.selectedObjects.map((member, index) => (
+        {membersList.selectedObjects.map((member, index) => (
 
           <li key={index}>
             <div>
@@ -91,7 +102,7 @@ export default function Attendence({ data }) {
         <h2 className=" my-2 text-1xl font-bold ">Lista de presença dos membros em {format(Date.now(), 'dd/MM/yyyy')}</h2>
         <form className=" my-2">
           <ul>
-            {data.selectedObjects.map((member, index) => (
+            {membersList.selectedObjects.map((member, index) => (
               <li key={index}>
                 <label>
                   {member.name}
