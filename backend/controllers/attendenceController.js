@@ -9,6 +9,10 @@ const jwt = require("jsonwebtoken");
 
 const registerAttendence = asyncHandler( async (req, res) => {
     
+    // TODO precisa refatorar para percorrer o json 
+
+    const attendedMembersObject =  req.body
+
     const{name, date, isPresent} = req.body
 
     console.log(req.body);

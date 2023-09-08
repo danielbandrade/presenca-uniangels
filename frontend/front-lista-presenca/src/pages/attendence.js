@@ -29,9 +29,10 @@ export default function Attendence({ membersList }) {
 
   const router = useRouter();
   const [membersAttendence, setSelectedMembers] = useState([]);
+  const membersAttendenceRefactor = []; 
 
 
-  const [membersAttendenceRefactor, setSelectedMembersRefactor] = useState([]);
+  // const [membersAttendenceRefactor, setSelectedMembersRefactor] = useState([]);
   // TODO refatorar lista de presentes para sempre conter todos os membros e mudar flag de presente 
 
 
@@ -45,19 +46,36 @@ export default function Attendence({ membersList }) {
       setSelectedMembers([...membersAttendence, selectedMember]);
     }
 
-    const newAttendenceHandle = membersList.selectedObjects.map( member => {
-      // colocar membersAttendenceRefactor aqui e inserir variável de presenca (flag) de acordo com itens selecionados
-      if (selectedMember === member ) {
-        console.log(member)
-        return {... member} }
-      else{
-        return console.log("que doidera")
-      }
-    })
   };
 
   const registerAttendence = async (event) => {
+
+    let membersAttendenceRefactor = [];
+
     event.preventDefault();
+    //console.log(attendenceHandle());
+    //console.log(membersList);
+    // console.log(membersAttendence);
+
+    membersList.selectedObjects.map( member => {
+      // TODO ele não está persistindo os dois membros na variável
+      if (membersAttendence.some(memberIterate => memberIterate.name === member.name) ) {
+        membersAttendenceRefactor['name'] = member.name;
+        membersAttendenceRefactor['isPresent'] = true;
+        membersAttendenceRefactor['date'] = format(Date.now(), 'yyyy-MM-dd');
+        console.log(membersAttendenceRefactor);
+        }
+      else{
+        membersAttendenceRefactor['name'] = member.name;
+        membersAttendenceRefactor['isPresent'] = false;
+        membersAttendenceRefactor['date'] = format(Date.now(), 'yyyy-MM-dd');
+        console.log(membersAttendenceRefactor);
+      }
+    })
+
+    console.log(membersAttendenceRefactor);
+
+
 
       try {
           const response = fetch('http://localhost:5000/api/attendences/register',{
@@ -65,7 +83,7 @@ export default function Attendence({ membersList }) {
             headers: {
               'Content-Type': 'application/json',
             },
-            body: JSON.stringify(membersAttendence),
+            body: JSON.stringify(membersAttendenceRefactor),
           })
           
           if (response.ok) {

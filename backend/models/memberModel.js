@@ -8,7 +8,7 @@ const memberSchema = mongoose.Schema({
     status: {
         type: Boolean,
         require: [true, "Please add a status"],
-        default: false,
+        default: true,
     }
 
 },{
