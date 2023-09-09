@@ -9,61 +9,73 @@ const jwt = require("jsonwebtoken");
 
 const registerAttendence = asyncHandler( async (req, res) => {
     
-    // TODO precisa refatorar para percorrer o json 
+    // TODO precisa refatorar para percorrer o objeto de json novo 
 
     const attendedMembersObject =  req.body
 
-    const{name, date, isPresent} = req.body
-
-    console.log(req.body);
+    //console.log(attendedMembersObject);
 
     //  Validation
-    if(!name && !date &&  !isPresent) {
-        res.status(400)
-        throw new Error("Please fill in all required fields - NEW")
-    }
+    attendedMembersObject.forEach(member => {
+        if(!member.name && !member.date &&  !member.isPresent) {
+            res.status(400);
+            throw new Error("Please fill in all required fields");
+        } 
+    });
+    
 
     // Check if member exists
-    const member = await Member.findOne({name});
 
-    
-    if(!member){
-        res.status(400)
-        throw new Error("Member does not exists")
-    };
+    attendedMembersObject.forEach(memberIterate => {
+        // TODO encontrar uma forma de buscar os membros na base de dados
+        /*const member = Member.findOne({memberIterate.name});
+        console.log(member);
+        if(!member){
+            res.status(400)
+            throw new Error("One Member does not exists")
+        };
 
-    const checkAttendence = await Attendence.findOne({
-        name,
-        date
-    })
-
-    if(checkAttendence){
-        res.status(400)
-        throw new Error("Attendence already exists")
-    };
-
-
-    // Create new presence
-    
-    const memberId = member._id;
-
-    const attendance = await Attendence.create({
-        member: memberId,
-        date: date,
-        isPresent: isPresent,
-    })
-
-    if (attendance){
-        const {_id, date, member} = attendance 
-        res.status(201).json({
-            _id,
-            member,
-            date
+        const checkAttendence = await Attendence.findOne({
+            member.name,
+            member.date
         })
+    
+        if(checkAttendence){
+            res.status(400)
+            throw new Error("Attendence already exists")
+        };
+    
+    
+        // Create new presence
+        
+        const memberId = member._id;
+    
+        const attendance = await Attendence.create({
+            member: memberId,
+            date: date,
+            isPresent: isPresent,
+        })
+    
+        if (attendance){
+            const {_id, date, member} = attendance 
+            res.status(201).json({
+                _id,
+                member,
+                date
+            })
+    
+        }else{
+            throw new Error("Invalid Attendece Data")
+        }
 
-    }else{
-        throw new Error("Invalid Attendece Data")
-    }
+        */
+    });
+
+    
+
+    
+    
+    
     
 });
 

@@ -29,7 +29,7 @@ export default function Attendence({ membersList }) {
 
   const router = useRouter();
   const [membersAttendence, setSelectedMembers] = useState([]);
-  const membersAttendenceRefactor = []; 
+  ///const [membersAttendenceRefactor, setSelectedMembersRefactor] = useState([]);
 
 
   // const [membersAttendenceRefactor, setSelectedMembersRefactor] = useState([]);
@@ -45,37 +45,30 @@ export default function Attendence({ membersList }) {
       // Item is not selected, so add it to the selection
       setSelectedMembers([...membersAttendence, selectedMember]);
     }
-
   };
 
   const registerAttendence = async (event) => {
 
-    let membersAttendenceRefactor = [];
-
     event.preventDefault();
-    //console.log(attendenceHandle());
     //console.log(membersList);
-    // console.log(membersAttendence);
+    //console.log(membersAttendence);
 
-    membersList.selectedObjects.map( member => {
-      // TODO ele não está persistindo os dois membros na variável
-      if (membersAttendence.some(memberIterate => memberIterate.name === member.name) ) {
-        membersAttendenceRefactor['name'] = member.name;
-        membersAttendenceRefactor['isPresent'] = true;
-        membersAttendenceRefactor['date'] = format(Date.now(), 'yyyy-MM-dd');
-        console.log(membersAttendenceRefactor);
-        }
-      else{
-        membersAttendenceRefactor['name'] = member.name;
-        membersAttendenceRefactor['isPresent'] = false;
-        membersAttendenceRefactor['date'] = format(Date.now(), 'yyyy-MM-dd');
-        console.log(membersAttendenceRefactor);
+    const membersAttendenceRefactor = membersList.selectedObjects.map( memberIterate => {
+      const {name} = memberIterate;
+      const date = format(Date.now(), 'yyyy-MM-dd')
+
+      let isPresent = false;
+
+      if(membersAttendence.includes(memberIterate)){
+        isPresent = true;
       }
+
+      return {
+        name,
+        date,
+        isPresent
+      };
     })
-
-    console.log(membersAttendenceRefactor);
-
-
 
       try {
           const response = fetch('http://localhost:5000/api/attendences/register',{
