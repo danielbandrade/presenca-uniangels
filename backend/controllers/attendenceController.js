@@ -9,8 +9,6 @@ const { error } = require("console");
 
 const registerAttendence = asyncHandler( async (req, res) => {
     
-    // TODO precisa refatorar para percorrer o objeto de json novo 
-
     const attendedMembersObject =  req.body
 
     //  Validation
@@ -22,8 +20,6 @@ const registerAttendence = asyncHandler( async (req, res) => {
     });
 
     for(const key in attendedMembersObject) {
-
-        // TODO encontrar uma forma de buscar os membros na base de dados
  
         const dbMember = await Member.findOne({name: attendedMembersObject[key].name})
 
@@ -36,19 +32,36 @@ const registerAttendence = asyncHandler( async (req, res) => {
 
         const checkAttendence = await Attendence.findOne({ member: dbMember._id , date: dbMember.date })
     
-
         if(checkAttendence){
             res.status(400)
             throw new Error("Attendence already exists")
         };
 
-        const memberId = member._id;
+        console.log("passamos por aqui antes");
 
-        const attendance = await Attendence.create({
-            member: attendedMembersObject[key]._id,
+        // TODO não esta criando a presenca abaixo
+
+        //console.log(dbMember._id);
+        //console.log(attendedMembersObject[key].date);
+        //console.log(attendedMembersObject[key].isPresent);
+
+        
+        const attendance = await Attendence.create(
+            {
+            member: dbMember._id._id,
             date: attendedMembersObject[key].date,
             isPresent: attendedMembersObject[key].isPresent,
-        })
+            },(error, createdDoc) => {
+                if (error) {
+                  console.error(error);
+                } else {
+                  console.log('New document created:', createdDoc);
+                }
+            }
+        );
+        
+
+        console.log("passamos por aqui");
 
         if (attendance){
             const {_id, date, member} = attendance 
@@ -62,7 +75,10 @@ const registerAttendence = asyncHandler( async (req, res) => {
             throw new Error("Invalid Attendece Data")
         }
         
-        }
+
+    
+
+    }
     
 
     

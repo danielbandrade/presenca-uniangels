@@ -1,4 +1,3 @@
-import { Inter } from 'next/font/google';
 import { useRouter } from 'next/router';
 import React, { useState } from 'react';
 const { format } = require('date-fns');
@@ -7,7 +6,6 @@ const { format } = require('date-fns');
 // TODO criar e usar componente que exibe membros 
 // TODO refatorar lista de presentes para sempre conter todos os membros e mudar flag de presente 
 // documentacao css https://v1.tailwindcss.com/components/buttons
-
 
 export async function getServerSideProps() {
 
@@ -33,7 +31,6 @@ export default function Attendence({ membersList }) {
 
 
   // const [membersAttendenceRefactor, setSelectedMembersRefactor] = useState([]);
-  // TODO refatorar lista de presentes para sempre conter todos os membros e mudar flag de presente 
 
 
   const handleSelectItem = (selectedMember) => {
@@ -70,8 +67,10 @@ export default function Attendence({ membersList }) {
       };
     })
 
+    console.log(membersAttendenceRefactor);
+
       try {
-          const response = fetch('http://localhost:5000/api/attendences/register',{
+          const response = await fetch('http://localhost:5000/api/attendences/register',{
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',
@@ -84,6 +83,7 @@ export default function Attendence({ membersList }) {
             console.log('registro de presenca funcionou');
           } else {
             console.log('Registrou de presenca nao funcionou');
+            console.log(response);
           }
         } 
       catch (error) {
@@ -115,10 +115,10 @@ export default function Attendence({ membersList }) {
           <ul>
             {membersList.selectedObjects.map((member, index) => (
               <li key={index}>
-                <label>
+                <label className=" my-2 text-1xl  ">
                   {member.name}
                   <input
-                    className="appearance-none border-2 rounded mx-2 py-2 px-2 leading-tight checked:bg-red-700"
+                    className="appearance-none border-2 rounded mx-4 -my-1 py-2 px-2 leading-tight checked:bg-red-700"
                     type="checkbox"
                     value={member.name}
                     checked={membersAttendence.includes(member)}
@@ -129,9 +129,7 @@ export default function Attendence({ membersList }) {
             ))}
           </ul>
           <p>Membros presentes: {membersAttendence.map(member => member.name).join(', ')} </p>
-                            
-
-
+          
           <button className="my-2 bg-red-600 hover:bg-red-800 text-white font-bold py-2 px-4 rounded-full" onClick={registerAttendence} >Registrar Presença</button>
         </form>
       </div>
