@@ -93,22 +93,27 @@ export default function Attendence({ membersList }) {
   return (
     
     <main>
-      <h1 className=" flex text-1xl font-bold ">Estes são os membros</h1>
-      <ul>
-        {membersList.selectedObjects.map((member, index) => (
 
-          <li key={index}>
-            <div>
-              {member.name} 
-              <a className=" text-xs" > Criado em: {format(Date.parse(member.createdAt), 'dd/MM/yyyy')} 
-              </a> 
-            </div>
-          </li>
+      <div className= " flex">
 
-        ))}
-      </ul>
+      <div className= " w-1/4 p-2 border-2" >
+        <h1 className=" flex text-1xl font-bold ">Estes são os membros</h1>
+        <ul>
+          {membersList.selectedObjects.map((member, index) => (
 
-      <div>
+            <li key={index}>
+              <div className= "border-2">
+                {member.name} 
+                <a className=" text-xs" > Criado em: {format(Date.parse(member.createdAt), 'dd/MM/yyyy')} 
+                </a> 
+              </div>
+            </li>
+
+          ))}
+        </ul>
+      </div>
+
+      <div className= "w-2/5 p-2 border-2"> 
 
         <h2 className=" my-2 text-1xl font-bold ">Lista de presença dos membros em {format(Date.now(), 'dd/MM/yyyy')}</h2>
         <form className=" my-2">
@@ -118,7 +123,7 @@ export default function Attendence({ membersList }) {
                 <label className=" my-2 text-1xl  ">
                   {member.name}
                   <input
-                    className="appearance-none border-2 rounded mx-4 -my-1 py-2 px-2 leading-tight checked:bg-red-700"
+                    className="appearance-none border-2 rounded mx-6 -my-1 py-2 px-2 leading-tight checked:bg-red-700"
                     type="checkbox"
                     value={member.name}
                     checked={membersAttendence.includes(member)}
@@ -134,6 +139,7 @@ export default function Attendence({ membersList }) {
         </form>
       </div>
 
+      </div>
     </main>
   )
 }
