@@ -1,20 +1,20 @@
 import Image from 'next/image';
 import { Inter } from 'next/font/google';
 import { useRouter } from 'next/router';
+import showMembers from '@/pages/showMembers';
 
-const inter = Inter({ subsets: ['latin'] })
 
 export default function Home() {
 
 const router = useRouter();
 
   return (
-    <main
-      className={`flex min-h-screen flex-col items-center justify-between p-24 ${inter.className}`}>
+    <main className={``}>
       <h1>Bem vindo</h1>
-      <button onClick={() => router.push('/login')}>
+      <showMembers/>
+      <button className='my-2 bg-red-600 hover:bg-red-800 text-white font-bold py-2 px-4 rounded-full' onClick={() => router.push('/login')}>
       Clique aqui para ir para o login
       </button>
     </main>
   )
-}
+};

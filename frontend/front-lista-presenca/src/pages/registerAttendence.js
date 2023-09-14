@@ -94,23 +94,28 @@ export default function Attendence({ membersList }) {
     
     <main>
 
-      <div className= " flex">
+      <div className= "flex">
 
-      <div className= " w-1/4 p-2 border-2" >
+      <div className= " w-1/2 p-2 border-2" >
         <h1 className=" flex text-1xl font-bold ">Estes são os membros</h1>
-        <ul>
-          {membersList.selectedObjects.map((member, index) => (
+          <div className= "">
+            <ul>
+              {membersList.selectedObjects.map((member, index) => (
 
-            <li key={index}>
-              <div className= "border-2">
-                {member.name} 
-                <a className=" text-xs" > Criado em: {format(Date.parse(member.createdAt), 'dd/MM/yyyy')} 
-                </a> 
-              </div>
-            </li>
+                
+                <li key={index}>
+                  <div className= "border-2">
+                    {member.name} 
+                  </div>
+                    <div className="border-2" > Criado em: {format(Date.parse(member.createdAt), 'dd/MM/yyyy')} 
+                    </div> 
+                  
+                </li>
+                
 
-          ))}
-        </ul>
+              ))}
+          </ul>
+        </div>
       </div>
 
       <div className= "w-2/5 p-2 border-2"> 
