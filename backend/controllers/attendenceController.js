@@ -7,6 +7,8 @@ const jwt = require("jsonwebtoken");
 const { error } = require("console");
 
 
+// TODO o registro de presenca para 5 membros nao funcionou corretamente
+
 const registerAttendence = asyncHandler( async (req, res) => {
     
     const attendedMembersObject =  req.body
@@ -61,8 +63,6 @@ const registerAttendence = asyncHandler( async (req, res) => {
         );
         
 
-        console.log("passamos por aqui");
-
         if (attendance){
             const {_id, date, member} = attendance 
             res.status(201).json({
@@ -74,10 +74,6 @@ const registerAttendence = asyncHandler( async (req, res) => {
         }else{
             throw new Error("Invalid Attendece Data")
         }
-        
-
-    
-
     }
     
 
