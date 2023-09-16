@@ -27,29 +27,27 @@ const ShowMembers = () => {
 
   const [membersList, setMemberList] = useState([]);
     
-    useEffect( () => { 
-        async function fetchData() {
-            try {
-                const res = await fetch('http://localhost:5000/api/members/getmembers');
-                setMemberList(await res.json());
-            } catch (err) {
-                console.log(err);
-            }
-        }
-        fetchData();
+    useEffect(() => { 
+
+      const dataFech = async () => {
+            const data = await ( 
+              await fetch('http://localhost:5000/api/members/getmembers'
+              )
+            ).json();
+
+        setMemberList(data);
+      };
+
+      dataFech();
+
     }, []);
+
+  const memberListJson = membersList.selectedObjects;
+  console.log(memberListJson);
 
   return (
 
-    <div className="flex">
-      <div className=" w-1/2 p-2 border-2" >
-        <h1 className=" flex text-1xl font-bold ">Estes são os membros</h1>
-        <div className="">
-        <div>{JSON.stringify(membersList)}</div>
-         
-        </div>
-      </div>
-    </div>
+    <div>{JSON.stringify(memberListJson)}</div>
   
   )
 
@@ -83,8 +81,12 @@ const ShowPosts = () => {
 
 
 
-<ul>
-            {membersList.selectedObjects.map((member, index) => (
+<div className="flex">
+      <div className=" w-1/2 p-2 border-2" >
+        <h1 className=" flex text-1xl font-bold ">Estes são os membros</h1>
+        <div className="">
+        <ul>
+            {memberListJson.map((member, index) => (
               <li key={index}>
                 <div className="border-2">
                   {member.name}
@@ -95,6 +97,10 @@ const ShowPosts = () => {
               </li>
             ))}
           </ul> 
+        
+        </div>
+      </div>
+    </div>
 
 
 

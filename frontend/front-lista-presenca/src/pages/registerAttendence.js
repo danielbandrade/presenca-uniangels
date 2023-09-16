@@ -1,6 +1,7 @@
 import { useRouter } from 'next/router';
 import React, { useState } from 'react';
 const { format } = require('date-fns');
+import ShowMembers from './showMembers';
 
 // TODO: criar todos os membros no backend
 // TODO criar e usar componente que exibe membros 
@@ -27,11 +28,6 @@ export default function Attendence({ membersList }) {
 
   const router = useRouter();
   const [membersAttendence, setSelectedMembers] = useState([]);
-  ///const [membersAttendenceRefactor, setSelectedMembersRefactor] = useState([]);
-
-
-  // const [membersAttendenceRefactor, setSelectedMembersRefactor] = useState([]);
-
 
   const handleSelectItem = (selectedMember) => {
 
@@ -46,9 +42,7 @@ export default function Attendence({ membersList }) {
 
   const registerAttendence = async (event) => {
 
-    event.preventDefault();
-    //console.log(membersList);
-    //console.log(membersAttendence);
+    event.preventDefault();;
 
     const membersAttendenceRefactor = membersList.selectedObjects.map( memberIterate => {
       const {name} = memberIterate;
@@ -96,26 +90,8 @@ export default function Attendence({ membersList }) {
 
       <div className= "flex">
 
-      <div className= " w-1/2 p-2 border-2" >
-        <h1 className=" flex text-1xl font-bold ">Estes são os membros</h1>
-          <div className= "">
-            <ul>
-              {membersList.selectedObjects.map((member, index) => (
-
-                
-                <li key={index}>
-                  <div className= "border-2">
-                    {member.name} 
-                  </div>
-                    <div className="border-2" > Criado em: {format(Date.parse(member.createdAt), 'dd/MM/yyyy')} 
-                    </div> 
-                  
-                </li>
-                
-
-              ))}
-          </ul>
-        </div>
+      <div className= "w-2/5 p-2 border-2"> 
+      
       </div>
 
       <div className= "w-2/5 p-2 border-2"> 
