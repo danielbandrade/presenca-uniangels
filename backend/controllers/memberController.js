@@ -47,7 +47,8 @@ const registerMember = asyncHandler( async (req, res) => {
 
 const getMembers = asyncHandler( async(req,res) => {
 
-    
+    console.log("passamos aqui");
+
     const members = await Member.find();
 
     // retorna as principais informações 

@@ -1,7 +1,7 @@
 import Image from 'next/image';
 import { Inter } from 'next/font/google';
 import { useRouter } from 'next/router';
-import ShowMembers from '@/components/showMembers';
+import ShowMembers from '@/pages/showMembers';
 
 
 export default function Home() {
@@ -13,6 +13,8 @@ const router = useRouter();
       <h1>Bem vindo</h1>
       <button className='my-2 bg-red-600 hover:bg-red-800 text-white font-bold py-2 px-4 rounded-full' onClick={() => router.push('/login')}>
       Clique aqui para ir para o login
+    
+
       </button>
       <ShowMembers/>
     </main>
