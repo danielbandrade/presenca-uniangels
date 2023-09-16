@@ -4,16 +4,13 @@ import { useRouter } from 'next/router';
 import ShowMembers from '@/components/ShowMembersComponent';
 
 
-export default function Home() {
+export default function showMembersPage() {
 
 const router = useRouter();
 
   return (
     <main className={'h1'}>
-      <h1>Bem vindo</h1>
-      <button className='my-2 bg-red-600 hover:bg-red-800 text-white font-bold py-2 px-4 rounded-full' onClick={() => router.push('/login')}>
-      Clique aqui para ir para o login
-      </button>
+      <ShowMembers/>
     </main>
   )
 };

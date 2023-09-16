@@ -1,7 +1,7 @@
 import { useRouter } from 'next/router';
 import React, { useState } from 'react';
 const { format } = require('date-fns');
-import ShowMembers from './showMembers';
+import ShowMembers from '../components/ShowMembersComponent';
 
 // TODO: criar todos os membros no backend
 // TODO criar e usar componente que exibe membros 
@@ -91,7 +91,7 @@ export default function Attendence({ membersList }) {
       <div className= "flex">
 
       <div className= "w-2/5 p-2 border-2"> 
-      
+        <ShowMembers/>
       </div>
 
       <div className= "w-2/5 p-2 border-2"> 

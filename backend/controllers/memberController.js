@@ -62,7 +62,7 @@ const getMembers = asyncHandler( async(req,res) => {
         return selectedProperties;
       });
 
-    res.status(201).json({
+    res.status(200).json({
         selectedObjects
     })
 
