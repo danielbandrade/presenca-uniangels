@@ -80,8 +80,16 @@ const registerAttendence = asyncHandler( async (req, res) => {
     
 });
     
+// TOD criar funcao para retornar presenca dos membros
+
+const getAttendenceLog = asyncHandler( async (req, res) => {
+    
+    res.status(201).json("This Worked");
+
+});
 
 
 module.exports = {
     registerAttendence,
+    getAttendenceLog
 };
