@@ -11,9 +11,23 @@ const router = useRouter();
   return (
     <main className={'h1'}>
       <h1>Bem vindo</h1>
-      <button className='my-2 bg-red-600 hover:bg-red-800 text-white font-bold py-2 px-4 rounded-full' onClick={() => router.push('/login')}>
-      Clique aqui para ir para o login
-      </button>
+      <ul>
+      <li>
+        <button className='my-2 bg-red-600 hover:bg-red-800 text-white font-bold py-2 px-4 rounded-full' onClick={() => router.push('/login')}>
+        Clique aqui para ir para o login
+        </button>
+      </li>
+      <li>
+        <button className='my-2 bg-red-600 hover:bg-red-800 text-white font-bold py-2 px-4 rounded-full' onClick={() => router.push('/registerAttendence')}>
+        Clique aqui para registrar presença
+        </button>
+      </li>
+      <li>
+        <button className='my-2 bg-red-600 hover:bg-red-800 text-white font-bold py-2 px-4 rounded-full' onClick={() => router.push('/showMembersPage')}>
+        Clique aqui para ver membros
+        </button>
+      </li>
+      </ul>
     </main>
   )
 };
