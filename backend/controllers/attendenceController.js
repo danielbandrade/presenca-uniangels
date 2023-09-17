@@ -11,7 +11,7 @@ const { error } = require("console");
 
 const registerAttendence = asyncHandler( async (req, res) => {
     
-    const attendedMembersObject =  req.body
+    const attendedMembersObject =  req.body;
 
     //  Validation
     attendedMembersObject.forEach(member => {
@@ -21,8 +21,12 @@ const registerAttendence = asyncHandler( async (req, res) => {
         } 
     });
 
+    let sucessRegister = 0;
+
     for(const key in attendedMembersObject) {
  
+        // TODO ele so esta olhando para um mebro
+
         const dbMember = await Member.findOne({name: attendedMembersObject[key].name})
 
         if(!dbMember){
@@ -32,55 +36,42 @@ const registerAttendence = asyncHandler( async (req, res) => {
 
         // Checar se presenca já existe
 
-        const checkAttendence = await Attendence.findOne({ member: dbMember._id , date: dbMember.date })
+        const checkAttendence = await Attendence.findOne({ member: dbMember._id , date: attendedMembersObject[key].date })
     
         if(checkAttendence){
-            res.status(400)
-            throw new Error("Attendence already exists")
+            res.status(400);
+            throw new Error("Registro já existente");
         };
-
-        console.log("passamos por aqui antes");
-
-        // TODO não esta criando a presenca abaixo
-
-        //console.log(dbMember._id);
-        //console.log(attendedMembersObject[key].date);
-        //console.log(attendedMembersObject[key].isPresent);
-
         
+
         const attendance = await Attendence.create(
             {
-            member: dbMember._id._id,
+            member: dbMember._id,
             date: attendedMembersObject[key].date,
             isPresent: attendedMembersObject[key].isPresent,
-            },(error, createdDoc) => {
-                if (error) {
-                  console.error(error);
-                } else {
-                  console.log('New document created:', createdDoc);
-                }
             }
         );
-        
 
-        if (attendance){
-            const {_id, date, member} = attendance 
-            res.status(201).json({
-                _id,
-                member,
-                date
-            })
-
-        }else{
-            throw new Error("Invalid Attendece Data")
+        if(attendance){
+            sucessRegister = sucessRegister + 1;
+            console.log(sucessRegister)
         }
-    }
-    
 
+    }
+
+
+    if (sucessRegister = attendedMembersObject.length()){
+        res.status(201).json({
+            sucessRegister
+        })
+
+    }else{
+        throw new Error("Invalid Attendece Data")
+    }
     
 });
     
-// TOD criar funcao para retornar presenca dos membros
+// TODO criar funcao para retornar presenca dos membros
 
 const getAttendenceLog = asyncHandler( async (req, res) => {
     

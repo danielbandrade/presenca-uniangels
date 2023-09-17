@@ -73,7 +73,6 @@ export default function Attendence({ membersList }) {
           })
           
           if (response.ok) {
-            router.push('/attendence');
             console.log('registro de presenca funcionou');
           } else {
             console.log('Registrou de presenca nao funcionou');
