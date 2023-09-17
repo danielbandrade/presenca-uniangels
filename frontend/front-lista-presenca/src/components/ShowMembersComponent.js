@@ -4,6 +4,62 @@ const { format } = require('date-fns');
 
 // TODO fazer a exibicao de membros ficar mais amigável
 
+const people = [
+  {
+    name: 'Leslie Alexander',
+    email: 'leslie.alexander@example.com',
+    role: 'Co-Founder / CEO',
+    imageUrl:
+      'https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
+    lastSeen: '3h ago',
+    lastSeenDateTime: '2023-01-23T13:23Z',
+  },
+  {
+    name: 'Michael Foster',
+    email: 'michael.foster@example.com',
+    role: 'Co-Founder / CTO',
+    imageUrl:
+      'https://images.unsplash.com/photo-1519244703995-f4e0f30006d5?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
+    lastSeen: '3h ago',
+    lastSeenDateTime: '2023-01-23T13:23Z',
+  },
+  {
+    name: 'Dries Vincent',
+    email: 'dries.vincent@example.com',
+    role: 'Business Relations',
+    imageUrl:
+      'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
+    lastSeen: null,
+  },
+  {
+    name: 'Lindsay Walton',
+    email: 'lindsay.walton@example.com',
+    role: 'Front-end Developer',
+    imageUrl:
+      'https://images.unsplash.com/photo-1517841905240-472988babdf9?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
+    lastSeen: '3h ago',
+    lastSeenDateTime: '2023-01-23T13:23Z',
+  },
+  {
+    name: 'Courtney Henry',
+    email: 'courtney.henry@example.com',
+    role: 'Designer',
+    imageUrl:
+      'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
+    lastSeen: '3h ago',
+    lastSeenDateTime: '2023-01-23T13:23Z',
+  },
+  {
+    name: 'Tom Cook',
+    email: 'tom.cook@example.com',
+    role: 'Director of Product',
+    imageUrl:
+      'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
+    lastSeen: null,
+  },
+]
+
+
 const ShowMembers = () => {
 
   const [membersList, setMemberList] = useState([]);
@@ -27,29 +83,43 @@ const ShowMembers = () => {
 
     <div>
 
+      <div className="px-4 sm:px-0">
+        <h3 className="text-base font-semibold leading-7 text-gray-900">Vonluntários de Startup UniAngels</h3>
+        <p className="mt-1 max-w-2xl text-sm leading-6 text-gray-500">Informações básicas.</p>
+      </div>
+
     {membersList.selectedObjects ? (
-
-        <div className="">
-          <div className="p-2 border-2" >
-            <h1 className="text-1xl font-bold ">Estes são os membros</h1>
-            <div className="">
-            <ul>
-                {membersList.selectedObjects.map((member, index) => (
-                  <li key={index}>
-                    <div className="border-2">
-                      {member.name}
+        <ul role="list" className="divide-y divide-gray-100">
+          {membersList.selectedObjects.map((member, index) => (
+            <li key={index} className="flex justify-between gap-x-6 py-5">
+              <div className="flex min-w-0 gap-x-4">
+                <img className="h-12 w-12 flex-none rounded-full bg-gray-50" src= {'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80'} alt="" />
+                <div className="min-w-0 flex-auto">
+                  <p className="text-sm font-semibold leading-6 text-gray-900">{member.name}</p>
+                  <p className="mt-1 truncate text-xs leading-5 text-gray-500">{member.name + "@uniangels.com.br"}</p>
+                </div>
+              </div>
+              <div className="hidden shrink-0 sm:flex sm:flex-col sm:items-end">
+                <p className="text-sm leading-6 text-gray-900">Vonluntário</p>
+                {member.createdAt ? (
+                  <p className="mt-1 text-xs leading-5 text-gray-500">
+                    Criado em: <time dateTime={member.createdAt}>{member.createdAt}</time>
+                  </p>
+                ) : (
+                  <div className="mt-1 flex items-center gap-x-1.5">
+                    <div className="flex-none rounded-full bg-emerald-500/20 p-1">
+                      <div className="h-1.5 w-1.5 rounded-full bg-emerald-500" />
                     </div>
-                      <div className="border-2" > Criado em: {format(Date.parse(member.createdAt), 'dd/MM/yyyy')}
-                    </div>
+                    <p className="text-xs leading-5 text-gray-500">Online</p>
+                  </div>
+                )}
+              </div>
+            </li>
+          ))}
+        </ul>
 
-                  </li>
-                )) }
-              </ul> 
-            
-            </div>
-          </div>
-        </div>
-      ) : null }
+        ) : null    }   
+    
 
     </div>
 
@@ -60,3 +130,39 @@ const ShowMembers = () => {
 
 
 export default  ShowMembers;
+
+
+
+
+/*
+
+<ul role="list" className="divide-y divide-gray-100">
+      {people.map((person) => (
+        <li key={person.email} className="flex justify-between gap-x-6 py-5">
+          <div className="flex min-w-0 gap-x-4">
+            <img className="h-12 w-12 flex-none rounded-full bg-gray-50" src={person.imageUrl} alt="" />
+            <div className="min-w-0 flex-auto">
+              <p className="text-sm font-semibold leading-6 text-gray-900">{person.name}</p>
+              <p className="mt-1 truncate text-xs leading-5 text-gray-500">{person.email}</p>
+            </div>
+          </div>
+          <div className="hidden shrink-0 sm:flex sm:flex-col sm:items-end">
+            <p className="text-sm leading-6 text-gray-900">{person.role}</p>
+            {person.lastSeen ? (
+              <p className="mt-1 text-xs leading-5 text-gray-500">
+                Last seen <time dateTime={person.lastSeenDateTime}>{person.lastSeen}</time>
+              </p>
+            ) : (
+              <div className="mt-1 flex items-center gap-x-1.5">
+                <div className="flex-none rounded-full bg-emerald-500/20 p-1">
+                  <div className="h-1.5 w-1.5 rounded-full bg-emerald-500" />
+                </div>
+                <p className="text-xs leading-5 text-gray-500">Online</p>
+              </div>
+            )}
+          </div>
+        </li>
+      ))}
+    </ul>
+
+*/
