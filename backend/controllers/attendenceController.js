@@ -74,10 +74,6 @@ const registerAttendence = asyncHandler( async (req, res) => {
 // TODO criar funcao para retornar presenca dos membros
 
 const getAttendenceLog = asyncHandler( async (req, res) => {
-    
-    // res.status(201).json("This Worked");
-
-    console.log("passamos aqui amigos")
 
     const attendenceCompleteLog = await Attendence.find({});
 
@@ -94,7 +90,27 @@ const getAttendenceLog = asyncHandler( async (req, res) => {
 });
 
 
+const deleteAttendenceLog = asyncHandler( async (req, res) => {
+    
+
+    // TODO aqui tenho que encontrar e deletar a data que quero deletar 
+
+    const dateToBeDeletedRequest =  req.body;
+
+    const attendencesToBeDeleted = await Attendence.find({ });
+
+
+    return console.log("passamos aqui amigos");
+
+
+});
+
+
+
+
+
 module.exports = {
     registerAttendence,
-    getAttendenceLog
+    getAttendenceLog,
+    deleteAttendenceLog
 };
