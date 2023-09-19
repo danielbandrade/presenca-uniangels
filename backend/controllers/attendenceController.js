@@ -75,7 +75,21 @@ const registerAttendence = asyncHandler( async (req, res) => {
 
 const getAttendenceLog = asyncHandler( async (req, res) => {
     
-    res.status(201).json("This Worked");
+    // res.status(201).json("This Worked");
+
+    console.log("passamos aqui amigos")
+
+    const attendenceCompleteLog = await Attendence.find({});
+
+    if (attendenceCompleteLog){
+        res.status(200).json({
+            attendenceCompleteLog
+        })
+
+    }else{
+        throw new Error("Request Failed")
+    }
+
 
 });
 
