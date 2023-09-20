@@ -95,12 +95,20 @@ const deleteAttendenceLog = asyncHandler( async (req, res) => {
 
     // TODO aqui tenho que encontrar e deletar a data que quero deletar 
 
-    const dateToBeDeletedRequest =  req.body;
+    const dateToBeDeleted =  req.body.date;
 
-    const attendencesToBeDeleted = await Attendence.find({ });
+    const attendencesToBeDeleted = await Attendence.find({ dateToBeDeleted }).remove().exec();
 
 
-    return console.log("passamos aqui amigos");
+    if (attendencesToBeDeleted){
+        res.status(200).json({
+            attendencesToBeDeleted
+        })
+
+    }else{
+        throw new Error("Request Failed")
+    }
+
 
 
 });

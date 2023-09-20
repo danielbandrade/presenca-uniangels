@@ -36,7 +36,7 @@ const ShowCompleteAttendenceLog = () => {
         <ul role="list" className="divide-y divide-gray-100">
           {completeAttendeceLog.attendenceCompleteLog.map((attendece, index) => (
             <li key={index} className="flex justify-between gap-x-6 py-5">
-                <p className="text-sm font-semibold leading-6 text-gray-900">{attendece.member}</p>
+                <p className="text-sm font-semibold leading-6 text-gray-900">{"Id membro: " +attendece.member}</p>
                 <p className="text-sm font-semibold leading-6 text-gray-900">{"Presente? " + attendece.isPresent}</p>
                 <p className="text-sm font-semibold leading-6 text-gray-900">{"Data " + attendece.date}</p>
             </li>
