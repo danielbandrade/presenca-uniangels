@@ -2,6 +2,7 @@ import { useRouter } from 'next/router';
 import React, { useState } from 'react';
 const { format } = require('date-fns');
 import ShowMembers from '../components/ShowMembersComponent';
+import Datepicker from "react-tailwindcss-datepicker";
 
 // TODO: criar todos os membros no backend
 // TODO criar e usar componente que exibe membros 
@@ -46,7 +47,7 @@ export default function Attendence({ membersList }) {
 
     const membersAttendenceRefactor = membersList.selectedObjects.map( memberIterate => {
       const {name} = memberIterate;
-      const date = format(Date.now(), 'yyyy-MM-dd')
+      const date = value.startDate;
 
       let isPresent = false;
 
@@ -59,7 +60,7 @@ export default function Attendence({ membersList }) {
         date,
         isPresent
       };
-    })
+    }) 
 
     console.log(membersAttendenceRefactor);
 
@@ -82,7 +83,19 @@ export default function Attendence({ membersList }) {
       catch (error) {
         console.error('Error:', error);
       }
-}
+
+    
+  }
+
+    const [value, setValue] = useState({
+      startDate: new Date(),
+    });
+
+    const handleValueChange = newValue => {
+      console.log("newValue:", newValue);
+      setValue(newValue);
+    };
+
   return (
     
     <main>
@@ -95,7 +108,15 @@ export default function Attendence({ membersList }) {
 
       <div className= "w-2/5 p-2 border-2"> 
 
-        <h2 className=" my-2 text-1xl font-bold ">Lista de presença dos membros em {format(Date.now(), 'dd/MM/yyyy')}</h2>
+        <h2 className=" my-2 text-1xl font-bold ">Lista de presença dos membros em {}</h2>
+        <div>
+          <Datepicker 
+            value={value}
+            primaryColor={"blue"}
+            asSingle={true}  
+            onChange={handleValueChange} 
+          />
+        </div>
         <form className=" my-2">
           <ul>
             {membersList.selectedObjects.map((member, index) => (

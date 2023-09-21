@@ -54,7 +54,6 @@ const registerAttendence = asyncHandler( async (req, res) => {
 
         if(attendance){
             sucessRegister = sucessRegister + 1;
-            console.log(sucessRegister)
         }
 
     }
@@ -77,6 +76,20 @@ const getAttendenceLog = asyncHandler( async (req, res) => {
 
     const attendenceCompleteLog = await Attendence.find({});
 
+
+    // const attendenceCompleteLog = await Attendence.aggregate([{
+    //     $lookup: {
+    //         from: "mebers", // collection name in db
+    //         localField: "member",
+    //         foreignField: "_id",
+    //         as: "nomesMembros"
+    //     }
+    // }]).exec(function(err, students) {
+    //     // students contain WorksnapsTimeEntries
+    // });
+
+    // console.log(attendenceCompleteLog)
+
     if (attendenceCompleteLog){
         res.status(200).json({
             attendenceCompleteLog
@@ -97,7 +110,7 @@ const deleteAttendenceLog = asyncHandler( async (req, res) => {
 
     const dateToBeDeleted =  req.body.date;
 
-    const attendencesToBeDeleted = await Attendence.find({ dateToBeDeleted }).remove().exec();
+    const attendencesToBeDeleted = await Attendence.find({ dateToBeDeleted }).deleteMany();
 
 
     if (attendencesToBeDeleted){
