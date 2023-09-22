@@ -7,7 +7,9 @@ const jwt = require("jsonwebtoken");
 const { error } = require("console");
 
 
-// TODO o registro de presenca para 5 membros nao funcionou corretamente
+// TODO criar endpoint para calcular o pencentual de pesenca dos membros
+// TODO criar header de navegacao 
+// TODO exibir presenca dos membros junto com os nomes (fazer no front?)
 
 const registerAttendence = asyncHandler( async (req, res) => {
     
@@ -105,11 +107,6 @@ const getAttendenceLog = asyncHandler( async (req, res) => {
 
 const deleteAttendenceLog = asyncHandler( async (req, res) => {
     
-
-    // TODO está deletando todos os registros 
-
-    console.log(req.body.dateToBeDeleted);
-
     const dateToBeDeleted =  req.body.dateToBeDeleted;
 
     const attendencesToBeDeleted = await Attendence.find({ date: dateToBeDeleted }).deleteMany();
@@ -129,7 +126,31 @@ const deleteAttendenceLog = asyncHandler( async (req, res) => {
 });
 
 
+const calculateMemberAttendence = asyncHandler( async (req, res) => {
 
+
+    const attendenceCalculation = await Attendence.aggregate([
+        {
+            $group: {
+               _id: '$member',
+                count:  { $sum: 1 }
+           }
+       }
+     ]);
+
+
+    if (attendenceCalculation){
+        res.status(200).json({
+            attendencesToBeDeleted
+        })
+
+    }else{
+        throw new Error("Request Failed")
+    }
+
+
+
+});
 
 
 module.exports = {

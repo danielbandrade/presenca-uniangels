@@ -2,7 +2,6 @@ import { useRouter } from 'next/router';
 import React, {useState, useEffect} from 'react';
 const { format } = require('date-fns');
 
-// TODO a pagina nao carrega
 
 const ShowCompleteAttendenceLog = () => {
 

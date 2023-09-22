@@ -53,7 +53,7 @@ export default function Attendence({ membersList }) {
 
       if(membersAttendence.includes(memberIterate)){
         isPresent = true;
-      }
+      } 
 
       return {
         name,
