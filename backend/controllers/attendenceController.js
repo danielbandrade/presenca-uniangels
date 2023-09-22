@@ -108,7 +108,9 @@ const deleteAttendenceLog = asyncHandler( async (req, res) => {
 
     // TODO está deletando todos os registros 
 
-    const dateToBeDeleted =  req.body.date;
+    console.log(req.body.dateToBeDeleted);
+
+    const dateToBeDeleted =  req.body.dateToBeDeleted;
 
     const attendencesToBeDeleted = await Attendence.find({ date: dateToBeDeleted }).deleteMany();
 

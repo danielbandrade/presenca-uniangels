@@ -11,7 +11,7 @@ function showCompleteAttendenceLogPage() {
 
         const dateToBeDeleted = value.startDate;
 
-        event.preventDefault();
+        //        event.preventDefault();
     
           try {
               const response = await fetch('http://localhost:5000/api/attendences/deleteattendencelog',{
@@ -47,17 +47,21 @@ function showCompleteAttendenceLogPage() {
 
     return (
         <main className={''}>
-            <div>Escolha aqui a data para deletar</div>
-            <div className={'w-1/3'}> 
-                <Datepicker 
-                    value={value}
-                    primaryColor={"blue"}
-                    asSingle={true}  
-                    onChange={handleValueChange} 
-                /> </div>    
-
-        <button className="my-2 bg-red-600 hover:bg-red-800 text-white font-bold py-2 px-4 rounded-full" onClick={deleteAttendenceDate} >Deletar Data</button>
-        <ShowCompleteAttendenceLog/>
+            <div className="flex">
+                <div className="w-2/5 p-2 border-2"> 
+                    <div>Escolha aqui a data para deletar</div>
+                    <Datepicker 
+                        value={value}
+                        primaryColor={"blue"}
+                        asSingle={true}  
+                        onChange={handleValueChange} 
+                    /> 
+                    <button className="my-2 bg-red-600 hover:bg-red-800 text-white font-bold py-2 px-4 rounded-full" onClick={deleteAttendenceDate} >Deletar Data</button>
+                    </div>    
+                
+            
+            <div className="w-2/5 p-2 border-2"><ShowCompleteAttendenceLog/></div>
+        </div>
         </main>
     )
 };
