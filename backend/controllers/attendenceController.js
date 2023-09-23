@@ -133,6 +133,9 @@ const calculateMemberAttendence = asyncHandler( async (req, res) => {
         {
             $project: {
                 member: 1,
+                totalDates: {  
+                    $cond: [ { $ne: ["$date", null ] }, 1, 0  ]
+                },
                 isPresent: {  
                     $cond: [ { $eq: ["$isPresent", true ] }, 1, 0  ]
                 },
@@ -144,10 +147,12 @@ const calculateMemberAttendence = asyncHandler( async (req, res) => {
         {
             $group: {
                _id: '$member',
+               counttotalDates: { $sum: "$totalDates" },
                isPresentCount: { $sum: "$isPresent" },
                notPresentCount: { $sum: "$notPresent" }
            }
        }
+
      ]);
 
     if (attendenceCalculation){
