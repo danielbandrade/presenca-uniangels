@@ -138,10 +138,9 @@ const calculateMemberAttendence = asyncHandler( async (req, res) => {
        }
      ]);
 
-
     if (attendenceCalculation){
         res.status(200).json({
-            attendencesToBeDeleted
+            attendenceCalculation
         })
 
     }else{
@@ -156,5 +155,6 @@ const calculateMemberAttendence = asyncHandler( async (req, res) => {
 module.exports = {
     registerAttendence,
     getAttendenceLog,
-    deleteAttendenceLog
+    deleteAttendenceLog,
+    calculateMemberAttendence,
 };
