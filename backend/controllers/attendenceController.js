@@ -131,9 +131,21 @@ const calculateMemberAttendence = asyncHandler( async (req, res) => {
 
     const attendenceCalculation = await Attendence.aggregate([
         {
+            $project: {
+                member: 1,
+                isPresent: {  
+                    $cond: [ { $eq: ["$isPresent", true ] }, 1, 0  ]
+                },
+                notPresent: {  
+                    $cond: [  { $eq: ["$isPresent", false ] }, 1, 0]
+                }
+            }
+        },
+        {
             $group: {
                _id: '$member',
-                count:  { $sum: 1 }
+               isPresentCount: { $sum: "$isPresent" },
+               notPresentCount: { $sum: "$notPresent" }
            }
        }
      ]);
