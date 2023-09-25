@@ -129,6 +129,8 @@ const deleteAttendenceLog = asyncHandler( async (req, res) => {
 const calculateMemberAttendence = asyncHandler( async (req, res) => {
 
 
+    // resp aqui: https://stackoverflow.com/questions/22819303/mongodb-aggregation-divide-computed-fields
+
     const attendenceCalculation = await Attendence.aggregate([
         {
             $project: {
@@ -151,9 +153,11 @@ const calculateMemberAttendence = asyncHandler( async (req, res) => {
                isPresentCount: { $sum: "$isPresent" },
                notPresentCount: { $sum: "$notPresent" }
            }
-       }
+        },
+        { $project: {counttotalDates:1, isPresentCount:1, notPresentCount:1, notPresentPercent: { $divide: [ "$isPresentCount", "$counttotalDates" ]}}}
+       
 
-     ]);
+        ]);
 
     if (attendenceCalculation){
         res.status(200).json({
