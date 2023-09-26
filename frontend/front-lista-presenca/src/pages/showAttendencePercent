@@ -1,0 +1,16 @@
+import Image from 'next/image';
+import { Inter } from 'next/font/google';
+import { useRouter } from 'next/router';
+import React, { useState } from 'react';
+import Datepicker from "react-tailwindcss-datepicker";
+
+function showAttendencePercent() { 
+
+    return (
+        <main className={''}>
+
+        </main>
+    )
+};
+
+export default showAttendencePercent; 

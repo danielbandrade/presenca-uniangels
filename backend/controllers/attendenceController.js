@@ -76,21 +76,7 @@ const registerAttendence = asyncHandler( async (req, res) => {
 
 const getAttendenceLog = asyncHandler( async (req, res) => {
 
-    const attendenceCompleteLog = await Attendence.find({});
-
-
-    // const attendenceCompleteLog = await Attendence.aggregate([{
-    //     $lookup: {
-    //         from: "mebers", // collection name in db
-    //         localField: "member",
-    //         foreignField: "_id",
-    //         as: "nomesMembros"
-    //     }
-    // }]).exec(function(err, students) {
-    //     // students contain WorksnapsTimeEntries
-    // });
-
-    // console.log(attendenceCompleteLog)
+    const attendenceCompleteLog = await Attendence.find({}).populate('member').exec();
 
     if (attendenceCompleteLog){
         res.status(200).json({
