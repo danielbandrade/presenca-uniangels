@@ -36,7 +36,7 @@ function showAttendencePercent() {
             <ul role="list" className="divide-y divide-gray-100">
               {attendecePercent.attendenceCalculation.map((attendece, index) => (
                 <li key={index} className="flex justify-between gap-x-6 py-5">
-                    <p className="text-sm font-semibold leading-6 text-gray-900">{"Id membro: " +attendece._id}</p>
+                    <p className="text-sm font-semibold leading-6 text-gray-900">{"Dados Completos: " +attendece.member[0].name}</p>
                     <p className="text-sm font-semibold leading-6 text-gray-900">{"Reuniões Comparecidas: " + attendece.isPresentCount}</p>
                     <p className="text-sm font-semibold leading-6 text-gray-900">{"Percentual de Presença: " + (attendece.presentPercent * 100).toFixed(0) + '%'}</p>
                 </li>

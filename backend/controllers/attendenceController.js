@@ -145,13 +145,25 @@ const calculateMemberAttendence = asyncHandler( async (req, res) => {
         { $project: {counttotalDates:1, isPresentCount:1, notPresentCount:1, presentPercent: { $divide: [ "$isPresentCount", "$counttotalDates" ]}}},
         {
             $lookup: {
-                from: "member",
+                from: "members",
                 localField: "_id",
-                foreignField: "member",
-                as: "uniangels_member"
+                foreignField: "_id",
+                as: "member"
+            }
+
+        },
+        {
+            $project: {
+                "_id": 1,
+                "counttotalDates": 1,
+                "isPresentCount": 1,
+                "notPresentCount": 1,
+                "presentPercent": 1,
+                "member.name": 1,
+                "member.createdAt": 1,
+                "member.status": 1
             }
         }
-       
 
         ]);
 
