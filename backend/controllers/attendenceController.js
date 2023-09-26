@@ -115,7 +115,9 @@ const deleteAttendenceLog = asyncHandler( async (req, res) => {
 const calculateMemberAttendence = asyncHandler( async (req, res) => {
 
 
-    // resp aqui: https://stackoverflow.com/questions/22819303/mongodb-aggregation-divide-computed-fields
+    // TODO ver como fazer query unindo com tabela de membros 
+
+    
 
     const attendenceCalculation = await Attendence.aggregate([
         {
@@ -140,10 +142,20 @@ const calculateMemberAttendence = asyncHandler( async (req, res) => {
                notPresentCount: { $sum: "$notPresent" }
            }
         },
-        { $project: {counttotalDates:1, isPresentCount:1, notPresentCount:1, notPresentPercent: { $divide: [ "$isPresentCount", "$counttotalDates" ]}}}
+        { $project: {counttotalDates:1, isPresentCount:1, notPresentCount:1, presentPercent: { $divide: [ "$isPresentCount", "$counttotalDates" ]}}},
+        {
+            $lookup: {
+                from: "member",
+                localField: "_id",
+                foreignField: "member",
+                as: "uniangels_member"
+            }
+        }
        
 
         ]);
+
+
 
     if (attendenceCalculation){
         res.status(200).json({
