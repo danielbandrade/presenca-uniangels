@@ -27,6 +27,11 @@ const router = useRouter();
         Clique aqui para ver membros
         </button>
       </li>
+      <li>
+        <button className='my-2 bg-red-600 hover:bg-red-800 text-white font-bold py-2 px-4 rounded-full' onClick={() => router.push('/showAttendencePercent')}>
+        Clique aqui para ver presenças
+        </button>
+      </li>
       </ul>
     </main>
   )

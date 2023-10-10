@@ -6,10 +6,7 @@ const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const { error } = require("console");
 
-
-// TODO criar endpoint para calcular o pencentual de pesenca dos membros
 // TODO criar header de navegacao 
-// TODO exibir presenca dos membros junto com os nomes (fazer no front?)
 
 const registerAttendence = asyncHandler( async (req, res) => {
     

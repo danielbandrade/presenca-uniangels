@@ -102,11 +102,11 @@ export default function Attendence({ membersList }) {
 
       <div className= "flex">
 
-      <div className= "w-2/5 p-2 border-2"> 
+      <div className= "w-2/5 p-2"> 
         <ShowMembers/>
       </div>
 
-      <div className= "w-2/5 p-2 border-2"> 
+      <div className= "w-2/5 p-2 "> 
 
         <h2 className=" my-2 text-1xl font-bold ">Lista de presença dos membros em {}</h2>
         <div>
@@ -141,6 +141,10 @@ export default function Attendence({ membersList }) {
       </div>
 
       </div>
+
+      <button className='my-2 bg-red-600 hover:bg-red-800 text-white font-bold py-2 px-4 rounded-full' onClick={() => router.push('/')}>
+        Clique aqui para voltar ao inicio
+      </button>
     </main>
   )
 }

@@ -62,6 +62,9 @@ function showCompleteAttendenceLogPage() {
             
             <div className="w-2/5 p-2 border-2"><ShowCompleteAttendenceLog/></div>
         </div>
+        <button className='my-2 bg-red-600 hover:bg-red-800 text-white font-bold py-2 px-4 rounded-full' onClick={() => router.push('/')}>
+        Clique aqui para voltar ao inicio
+        </button>
         </main>
     )
 };

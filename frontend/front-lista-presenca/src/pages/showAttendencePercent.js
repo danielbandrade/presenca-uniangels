@@ -6,6 +6,8 @@ import Datepicker from "react-tailwindcss-datepicker";
 
 function showAttendencePercent() {
 
+  const router = useRouter();
+
     const [attendecePercent, setCompleteAttendecePercent] = useState([]);
       
       useEffect(() => { 
@@ -45,7 +47,10 @@ function showAttendencePercent() {
     
             ) : null    }   
         
-    
+
+        <button className='my-2 bg-red-600 hover:bg-red-800 text-white font-bold py-2 px-4 rounded-full' onClick={() => router.push('/')}>
+        Clique aqui para voltar ao inicio
+        </button>
         </div>
     
     
