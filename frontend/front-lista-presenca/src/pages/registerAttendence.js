@@ -4,7 +4,7 @@ const { format } = require('date-fns');
 import ShowMembers from '../components/ShowMembersComponent';
 import Datepicker from "react-tailwindcss-datepicker";
 
-// TODO: criar todos os membros no backend
+// TODO ajustar 
 // TODO criar e usar componente que exibe membros 
 // TODO refatorar lista de presentes para sempre conter todos os membros e mudar flag de presente 
 // documentacao css https://v1.tailwindcss.com/components/buttons
@@ -120,9 +120,8 @@ export default function Attendence({ membersList }) {
         <form className=" my-2">
           <ul>
             {membersList.selectedObjects.map((member, index) => (
-              <li key={index}>
-                <label className=" my-2 text-1xl  ">
-                  {member.name}
+              <li key={index} className="flex justify-between gap-x-6 py-5">
+                <p className="text-sm font-semibold leading-6 text-gray-900">{"Id membro: " +member.name}</p>    
                   <input
                     className="appearance-none border-2 rounded mx-6 -my-1 py-2 px-2 leading-tight checked:bg-red-700"
                     type="checkbox"
@@ -130,11 +129,9 @@ export default function Attendence({ membersList }) {
                     checked={membersAttendence.includes(member)}
                     onChange={() => handleSelectItem(member)}
                   />
-                </label>
               </li>
             ))}
           </ul>
-          <p>Membros presentes: {membersAttendence.map(member => member.name).join(', ')} </p>
           
           <button className="my-2 bg-red-600 hover:bg-red-800 text-white font-bold py-2 px-4 rounded-full" onClick={registerAttendence} >Registrar Presença</button>
         </form>
