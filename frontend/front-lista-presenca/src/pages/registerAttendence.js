@@ -2,9 +2,10 @@ import { useRouter } from 'next/router';
 import React, { useState } from 'react';
 const { format } = require('date-fns');
 import ShowMembers from '../components/ShowMembersComponent';
-import Datepicker from "react-tailwindcss-datepicker";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 
-// TODO ajustar 
+// TODO melhorar escolha de data
 // TODO criar e usar componente que exibe membros 
 // TODO refatorar lista de presentes para sempre conter todos os membros e mudar flag de presente 
 // documentacao css https://v1.tailwindcss.com/components/buttons
@@ -47,7 +48,7 @@ export default function Attendence({ membersList }) {
 
     const membersAttendenceRefactor = membersList.selectedObjects.map( memberIterate => {
       const {name} = memberIterate;
-      const date = value.startDate;
+      const date = startDate;
 
       let isPresent = false;
 
@@ -87,14 +88,7 @@ export default function Attendence({ membersList }) {
     
   }
 
-    const [value, setValue] = useState({
-      startDate: new Date(),
-    });
-
-    const handleValueChange = newValue => {
-      console.log("newValue:", newValue);
-      setValue(newValue);
-    };
+    const [startDate, setStartDate] = useState(new Date());
 
   return (
     
@@ -109,13 +103,12 @@ export default function Attendence({ membersList }) {
       <div className= "w-2/5 p-2 "> 
 
         <h2 className=" my-2 text-1xl font-bold ">Lista de presença dos membros em {}</h2>
-        <div>
-          <Datepicker 
-            value={value}
-            primaryColor={"blue"}
-            asSingle={true}  
-            onChange={handleValueChange} 
-          />
+        <div >
+          <DatePicker 
+            dateFormat="dd/MM/yyyy"
+            border = "10px"
+            selected={startDate} 
+            onChange={(date) => setStartDate(date)} />
         </div>
         <form className=" my-2">
           <ul>
