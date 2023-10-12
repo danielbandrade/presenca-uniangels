@@ -7,6 +7,8 @@ const jwt = require("jsonwebtoken");
 const { error } = require("console");
 
 // TODO criar header de navegacao 
+// TODO criar navegacao com login
+// TODO fazer a aplicacao fica bonita
 
 const registerAttendence = asyncHandler( async (req, res) => {
     
