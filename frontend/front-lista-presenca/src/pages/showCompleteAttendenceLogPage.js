@@ -6,6 +6,8 @@ import ShowCompleteAttendenceLog from '@/components/ShowCompleteAttendenceLog'
 import Datepicker from "react-tailwindcss-datepicker";
 
 function showCompleteAttendenceLogPage() {
+  
+  const router = useRouter();
 
     const deleteAttendenceDate = async (event) => {
 
