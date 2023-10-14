@@ -3,6 +3,7 @@ import { Inter } from 'next/font/google';
 import { useRouter } from 'next/router';
 import React, {useState, useEffect} from 'react';
 import Datepicker from "react-tailwindcss-datepicker";
+import HeaderApp from '@/components/HeaderApp';
 
 function showAttendencePercent() {
 
@@ -27,7 +28,12 @@ function showAttendencePercent() {
   
       return (
 
+        
         <div>
+
+          <div>
+            <HeaderApp/>
+          </div>
     
           <div className="px-4 sm:px-0">
             <h3 className="text-base font-semibold leading-7 text-gray-900">Vonluntários de Startup UniAngels</h3>
@@ -49,11 +55,10 @@ function showAttendencePercent() {
         
 
         <button className='my-2 bg-red-600 hover:bg-red-800 text-white font-bold py-2 px-4 rounded-full' onClick={() => router.push('/')}>
-        Clique aqui para voltar ao inicio
+          Clique aqui para voltar ao inicio
         </button>
         </div>
-    
-    
+  
       )
   
   };

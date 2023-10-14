@@ -5,9 +5,9 @@ const HeaderApp = () => {
     
     let Links =[
         {name:"HOME",link:"/"},
-        {name:"SERVICE",link:"/"},
-        {name:"ABOUT",link:"/"},
-        {name:"CONTACT",link:"/"},
+        {name:"REGISTRAR",link:"/registerAttendence"},
+        {name:"MEMBROS",link:"/showMembersPage"},
+        {name:"REGISTRO COMPLETO",link:"/showAttendencePercent"},
       ];
       let [open, setOpen] = useState(false);
 

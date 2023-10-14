@@ -4,6 +4,7 @@ import { useRouter } from 'next/router';
 import React, { useState } from 'react';
 import ShowCompleteAttendenceLog from '@/components/ShowCompleteAttendenceLog'
 import Datepicker from "react-tailwindcss-datepicker";
+import HeaderApp from '@/components/HeaderApp';
 
 function showCompleteAttendenceLogPage() {
   
@@ -49,6 +50,9 @@ function showCompleteAttendenceLogPage() {
 
     return (
         <main className={''}>
+            <div>
+               <HeaderApp/>
+            </div>
             <div className="flex">
                 <div className="w-2/5 p-2 border-2"> 
                     <div>Escolha aqui a data para deletar</div>

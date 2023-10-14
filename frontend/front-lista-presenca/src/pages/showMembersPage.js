@@ -3,6 +3,7 @@ import { Inter } from 'next/font/google';
 import { useRouter } from 'next/router';
 import React, { useState } from 'react';
 import ShowMembers from '@/components/ShowMembersComponent';
+import HeaderApp from '@/components/HeaderApp';
 
 
 // TODO outra forma de fazer o header: https://medium.com/@ryaddev/creating-a-responsive-navbar-with-react-and-tailwind-css-502cceaf9f53
@@ -13,6 +14,9 @@ export default function showMembersPage() {
 
   return (
     <main>
+        <div>
+           <HeaderApp/>
+        </div>
         <div className="bg-primary w-full overflow-hidden">
           <div className={`sm:px-16 px-6 flex justify-center items-center`}>
             <div className={`xl:max-w-[1280px] w-full`}>

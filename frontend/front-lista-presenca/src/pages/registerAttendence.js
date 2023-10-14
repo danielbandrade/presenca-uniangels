@@ -4,6 +4,7 @@ const { format } = require('date-fns');
 import ShowMembers from '../components/ShowMembersComponent';
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import HeaderApp  from '@/components/HeaderApp';
 
 // TODO melhorar escolha de data
 // TODO criar e usar componente que exibe membros 
@@ -93,6 +94,9 @@ export default function Attendence({ membersList }) {
   return (
     
     <main>
+      <div>
+        <HeaderApp/>
+      </div>
 
       <div className= "flex">
 
