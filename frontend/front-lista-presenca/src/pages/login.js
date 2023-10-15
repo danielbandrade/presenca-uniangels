@@ -2,6 +2,7 @@
 import React, { useState } from 'react';
 import { Inter } from 'next/font/google';
 import { useRouter } from 'next/router';
+import HeaderApp from '@/components/HeaderApp';
 
 
 // TODO P1 cadastrar membros do uniangels e fazer POC de preenchimento de presenca
@@ -45,7 +46,10 @@ const Login = () => {
   return (
     <main
       className={`flex min-h-screen flex-col  justify-between p-24 ${inter.className}`}>
-    
+    <div>
+          <HeaderApp/>
+    </div>
+
     <div >
       <h1>Página de Login Lista de Presença</h1>
       <form onSubmit={handleSubmit}>

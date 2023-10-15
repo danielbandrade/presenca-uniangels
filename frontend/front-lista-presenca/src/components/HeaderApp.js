@@ -7,7 +7,7 @@ const HeaderApp = () => {
         {name:"HOME",link:"/"},
         {name:"REGISTRAR",link:"/registerAttendence"},
         {name:"MEMBROS",link:"/showMembersPage"},
-        {name:"REGISTRO COMPLETO",link:"/showAttendencePercent"},
+        {name:"EXIBIR REGISTRO",link:"/showAttendencePercent"},
       ];
       let [open, setOpen] = useState(false);
 
@@ -16,7 +16,7 @@ const HeaderApp = () => {
            <div className='md:flex items-center justify-between bg-white py-4 md:px-10 px-7'>
             {/* logo section */}
             <div className='font-bold text-2xl cursor-pointer flex items-center gap-1'>
-                <HandRaisedIcon className='w-7 h-7 text-blue-600'/>
+                <HandRaisedIcon className='w-7 h-7 text-red-700'/>
                 <span>Presença UniAngels</span>
             </div>
             {/* Menu icon */}
