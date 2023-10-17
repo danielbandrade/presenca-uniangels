@@ -5,6 +5,7 @@ import ShowMembers from '../components/ShowMembersComponent';
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import HeaderApp  from '@/components/HeaderApp';
+import ShowAttendencePercentComponent from '@/components/ShowAttendencePercentComponent';
 
 // TODO melhorar escolha de data
 // TODO criar e usar componente que exibe membros 
@@ -44,8 +45,6 @@ export default function Attendence({ membersList }) {
   };
 
   const registerAttendence = async (event) => {
-
-    event.preventDefault();;
 
     const membersAttendenceRefactor = membersList.selectedObjects.map( memberIterate => {
       const {name} = memberIterate;
@@ -101,7 +100,7 @@ export default function Attendence({ membersList }) {
       <div className= "flex">
 
       <div className= "w-2/5 p-2"> 
-        <ShowMembers/>
+        <ShowAttendencePercentComponent/>
       </div>
 
       <div className= "w-2/5 p-2 "> 
@@ -135,10 +134,6 @@ export default function Attendence({ membersList }) {
       </div>
 
       </div>
-
-      <button className='my-2 bg-red-600 hover:bg-red-800 text-white font-bold py-2 px-4 rounded-full' onClick={() => router.push('/')}>
-        Clique aqui para voltar ao inicio
-      </button>
     </main>
   )
 }
