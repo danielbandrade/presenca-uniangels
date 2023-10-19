@@ -6,6 +6,7 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import HeaderApp  from '@/components/HeaderApp';
 import ShowAttendencePercentComponent from '@/components/ShowAttendencePercentComponent';
+import { Checkbox } from '@material-tailwind/react';
 
 // TODO melhorar escolha de data
 // TODO criar e usar componente que exibe membros 
@@ -117,11 +118,9 @@ export default function Attendence({ membersList }) {
           <ul>
             {membersList.selectedObjects.map((member, index) => (
               <li key={index} className="flex justify-between gap-x-6 py-5">
-                <p className="text-sm font-semibold leading-6 text-gray-900">{"Id membro: " +member.name}</p>    
-                  <input
-                    className="appearance-none border-2 rounded mx-6 -my-1 py-2 px-2 leading-tight checked:bg-red-700"
-                    type="checkbox"
-                    value={member.name}
+                <p className="text-sm font-semibold leading-6 text-gray-900">{member.name}</p>    
+                  <Checkbox
+                    className="border-2 border-zinc-950 lg rounded mx-6 -my-1 py-2 px-2 leading-tight checked:bg-red-700"               
                     checked={membersAttendence.includes(member)}
                     onChange={() => handleSelectItem(member)}
                   />
