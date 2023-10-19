@@ -8,10 +8,8 @@ import HeaderApp  from '@/components/HeaderApp';
 import ShowAttendencePercentComponent from '@/components/ShowAttendencePercentComponent';
 import { Checkbox } from '@material-tailwind/react';
 
-// TODO melhorar escolha de data
-// TODO criar e usar componente que exibe membros 
-// TODO refatorar lista de presentes para sempre conter todos os membros e mudar flag de presente 
-// documentacao css https://v1.tailwindcss.com/components/buttons
+// TODO ajustar date picker https://reactdatepicker.com/
+// TODO ajustar essa tela para ficar amigável
 
 export async function getServerSideProps() {
 
@@ -109,8 +107,9 @@ export default function Attendence({ membersList }) {
         <h2 className=" my-2 text-1xl font-bold ">Lista de presença dos membros em {}</h2>
         <div >
           <DatePicker 
+            className="border-zinc-950 "
             dateFormat="dd/MM/yyyy"
-            border = "10px"
+            showIcon
             selected={startDate} 
             onChange={(date) => setStartDate(date)} />
         </div>
