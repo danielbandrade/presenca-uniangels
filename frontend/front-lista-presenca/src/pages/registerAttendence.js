@@ -110,6 +110,7 @@ export default function Attendence({ membersList }) {
             className="border-zinc-950 "
             dateFormat="dd/MM/yyyy"
             showIcon
+            border= "solid 2px pink" 
             selected={startDate} 
             onChange={(date) => setStartDate(date)} />
         </div>

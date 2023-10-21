@@ -5,6 +5,7 @@ import { useRouter } from 'next/router';
 import HeaderApp from '@/components/HeaderApp';
 
 
+// TODO Fazer a página de login funcionar
 // TODO P1 cadastrar membros do uniangels e fazer POC de preenchimento de presenca
 // TODO P2 fazer login passar o cookie de protecao para página de presenca usando js coockie 
 
@@ -30,7 +31,7 @@ const Login = () => {
   
         if (response.ok) {
           // Handle successful login response here
-          router.push('/attendence');
+          console.log("login funcionou " + response.body)
         } else {
           // Handle login error response here
           console.log('Login failed!');
@@ -58,7 +59,7 @@ const Login = () => {
           <input
             type="email"
             value={email}
-            style={{ color: 'red', margin: '10px'  }}
+            className='my-2 border-2  font-bold py-2 px-4 '
             onChange={(e) => setEmail(e.target.value)}
           />
         </div>
@@ -66,8 +67,8 @@ const Login = () => {
           <label>Password:</label>
           <input
             type="password"
+            className='my-2 border-2 font-bold py-2 px-4 '
             value={password}
-            style={{ color: 'red', margin: '10px'  }}
             onChange={(e) => setPassword(e.target.value)}
           />
         </div>
