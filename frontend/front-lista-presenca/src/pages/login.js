@@ -1,6 +1,5 @@
 // pages/login.js
 import React, { useState } from 'react';
-import { Inter } from 'next/font/google';
 import { useRouter } from 'next/router';
 import HeaderApp from '@/components/HeaderApp';
 
@@ -9,8 +8,6 @@ import HeaderApp from '@/components/HeaderApp';
 // TODO P1 cadastrar membros do uniangels e fazer POC de preenchimento de presenca
 // TODO P2 fazer login passar o cookie de protecao para página de presenca usando js coockie 
 
-
-const inter = Inter({ subsets: ['latin'] })
 
 const Login = () => {
   const [email, setEmail] = useState('');
@@ -45,13 +42,12 @@ const Login = () => {
   };
 
   return (
-    <main
-      className={`flex min-h-screen flex-col  justify-between p-24 ${inter.className}`}>
+    <main>
     <div>
           <HeaderApp/>
     </div>
 
-    <div >
+    <div>
       <h1>Página de Login Lista de Presença</h1>
       <form onSubmit={handleSubmit}>
         <div>
@@ -59,7 +55,7 @@ const Login = () => {
           <input
             type="email"
             value={email}
-            className='my-2 border-2  font-bold py-2 px-4 '
+            className='my-2 mx-2 border-2 font-bold py-2 px-4 '
             onChange={(e) => setEmail(e.target.value)}
           />
         </div>
@@ -67,7 +63,7 @@ const Login = () => {
           <label>Password:</label>
           <input
             type="password"
-            className='my-2 border-2 font-bold py-2 px-4 '
+            className='my-2 mx-2 border-2 font-bold py-2 px-4 '
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
