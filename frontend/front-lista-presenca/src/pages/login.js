@@ -1,4 +1,3 @@
-// pages/login.js
 import React, { useState } from 'react';
 import { useRouter } from 'next/router';
 import HeaderApp from '@/components/HeaderApp';
@@ -29,6 +28,7 @@ const Login = () => {
         if (response.ok) {
           // Handle successful login response here
           console.log("login funcionou " + response.body)
+          router.push("/loggedinStatus")
         } else {
           // Handle login error response here
           console.log('Login failed!');
