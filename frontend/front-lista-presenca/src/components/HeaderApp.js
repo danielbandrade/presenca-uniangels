@@ -30,7 +30,7 @@ const HeaderApp = () => {
                 {
                     Links.map((link) => (
                     <li key={link} className='md:ml-8 md:my-0 my-7 font-semibold'>
-                        <a href={link.link} className='text-gray-800 hover:text-blue-400 duration-500'>{link.name}</a>
+                        <a className='text-gray-800 hover:text-blue-400 duration-500'>{link.name}</a>
                     </li>))
                 }
                 <button className='btn bg-red-600 text-white md:ml-8 font-semibold px-3 py-1 rounded duration-500 md:static'>Registrar</button>

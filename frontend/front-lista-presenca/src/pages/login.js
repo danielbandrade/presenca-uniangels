@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useRouter } from 'next/router';
 import HeaderApp from '@/components/HeaderApp';
+import Cookies from 'universal-cookie';
 
 
 // TODO Fazer a página de login funcionar
@@ -12,6 +13,7 @@ const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const router = useRouter();
+  const cookies = new Cookies(); 
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -24,11 +26,15 @@ const Login = () => {
           },
           body: JSON.stringify({ email, password }),
         });
-  
+
+        console.log(response.headers["Set-Cookies"]);
+
         if (response.ok) {
           // Handle successful login response here
-          console.log("login funcionou " + response.body)
-          router.push("/loggedinStatus")
+          console.log("login funcionou ");
+          console.log(response.headers["set-cookie"]);
+          //cookies.set('auth_token', response.cookie ,{ path: '/' });
+          //console.log(cookies.get('auth_token'));
         } else {
           // Handle login error response here
           console.log('Login failed!');
@@ -47,7 +53,7 @@ const Login = () => {
           <HeaderApp/>
     </div>
 
-    <div>
+    <div className='py-6'>
       <h1>Página de Login Lista de Presença</h1>
       <form onSubmit={handleSubmit}>
         <div>
@@ -55,7 +61,7 @@ const Login = () => {
           <input
             type="email"
             value={email}
-            className='my-2 mx-2 border-2 font-bold py-2 px-4 '
+            className='my-2 mx-2  border-2 font-bold py-2 px-4 '
             onChange={(e) => setEmail(e.target.value)}
           />
         </div>
