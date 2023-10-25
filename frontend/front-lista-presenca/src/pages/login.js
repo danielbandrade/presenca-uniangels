@@ -28,11 +28,14 @@ const Login = () => {
         });
 
         console.log(response.headers["Set-Cookies"]);
+        const cookieHeader = response.headers.get('Set-Cookie');
+        console.log(cookieHeader);
 
         if (response.ok) {
           // Handle successful login response here
           console.log("login funcionou ");
           console.log(response.headers["set-cookie"]);
+          
           //cookies.set('auth_token', response.cookie ,{ path: '/' });
           //console.log(cookies.get('auth_token'));
         } else {
