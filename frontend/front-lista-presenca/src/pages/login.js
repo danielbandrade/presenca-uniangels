@@ -15,7 +15,7 @@ const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const router = useRouter();
-  const cookies = new Cookies(); 
+  const cookies = new Cookies({ path: '/' });
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -32,7 +32,10 @@ const Login = () => {
 
         if (response.token) {
           // Handle successful login response here
-          console.log("login funcionou ");       
+          console.log("login funcionou ");     
+          cookies.set('token', response.token); 
+          router.push('/loggedinStatus');
+
         } else {
           // Handle login error response here
           console.log('Login failed!');
