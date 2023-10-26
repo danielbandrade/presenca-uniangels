@@ -2,9 +2,11 @@ import React, { useState } from 'react';
 import { useRouter } from 'next/router';
 import HeaderApp from '@/components/HeaderApp';
 import Cookies from 'universal-cookie';
+import axios from 'axios';
 
 
 // TODO Fazer a página de login funcionar
+// tentando fazer o login com axios funcionar https://sabe.io/blog/javascript-pass-cookies-fetch-axios
 // TODO P1 cadastrar membros do uniangels e fazer POC de preenchimento de presenca
 // TODO P2 fazer login passar o cookie de protecao para página de presenca usando js coockie 
 
@@ -19,25 +21,18 @@ const Login = () => {
     e.preventDefault();
 
     try {
-        const response = await fetch('http://localhost:5000/api/users/login', {
+        const response =  await ( await  fetch('http://localhost:5000/api/users/login', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
           },
+          credentials: 'same-origin',
           body: JSON.stringify({ email, password }),
-        });
+        }) ).json()
 
-        console.log(response.headers["Set-Cookies"]);
-        const cookieHeader = response.headers.get('Set-Cookie');
-        console.log(cookieHeader);
-
-        if (response.ok) {
+        if (response.token) {
           // Handle successful login response here
-          console.log("login funcionou ");
-          console.log(response.headers["set-cookie"]);
-          
-          //cookies.set('auth_token', response.cookie ,{ path: '/' });
-          //console.log(cookies.get('auth_token'));
+          console.log("login funcionou ");       
         } else {
           // Handle login error response here
           console.log('Login failed!');
@@ -45,6 +40,8 @@ const Login = () => {
       } catch (error) {
         // Handle error here
         console.error('Error:', error);
+
+        
       }
 
 
