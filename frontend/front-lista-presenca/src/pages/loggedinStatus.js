@@ -11,17 +11,18 @@ import Cookies from 'universal-cookie';
 function loggedinStatus() {
 
   const router = useRouter();
-  const coockie = new Cookies();
+  const cookie = new Cookies();
 
     const [loggedInStatus, setLoggedInStatus] = useState([]);
       
       useEffect(() => { 
   
         const dataFech = async () => {
-              const data = await ( 
-                await fetch('http://localhost:5000/api/users/loggedin', {
-                    credentials: "include"
-                })
+
+            console.log(cookie.get('token'));
+              
+            const data =  ( 
+                await fetch('http://localhost:5000/api/users/loggedin')
               ).json();
   
             setLoggedInStatus(data);
