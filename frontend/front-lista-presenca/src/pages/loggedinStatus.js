@@ -19,13 +19,14 @@ function loggedinStatus() {
   
         const dataFech = async () => {
 
-            console.log(cookie.get('token'));
+            // verifica como acessa cookie <> console.log(cookie.get('token'));
               
-            const data =  ( 
-                await fetch('http://localhost:5000/api/users/loggedin')
-              ).json();
-  
-            setLoggedInStatus(data);
+            const data = await fetch('http://localhost:5000/api/users/loggedin', {   
+                method: "GET", 
+                'credentials': 'include',
+                })
+            
+                setLoggedInStatus(data);
         };
   
         dataFech();
@@ -42,7 +43,7 @@ function loggedinStatus() {
             </div>
 
             <div className='py-6'>
-                Olá Mundo {JSON.stringify(loggedInStatus)}
+                Olá Mundo 
             </div>
             
         
