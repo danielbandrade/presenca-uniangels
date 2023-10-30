@@ -3,6 +3,8 @@ import React, {useState, useEffect} from 'react';
 const { format } = require('date-fns');
 
 
+// TODO ver como exibir membros sempre na mesma ordem 
+
 const ShowCompleteAttendenceLog = () => {
 
   const [completeAttendeceLog, setCompleteAttendeceLog] = useState([]);
