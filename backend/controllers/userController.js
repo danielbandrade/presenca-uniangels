@@ -170,8 +170,6 @@ const loginStatus = asyncHandler( async (req,res) => {
 
     const token = req.cookies.token
 
-    console.log(req.cookies);
-    console.log("passei aqui");
     
     if(!token){
         return res.json(false)
