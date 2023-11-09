@@ -1,3 +1,4 @@
+import { cookies } from 'next/dist/client/components/headers';
 import { useRouter } from 'next/router';
 import React, {useState, useEffect} from 'react';
 const { format } = require('date-fns');
@@ -9,22 +10,22 @@ function ShowAttendencePercentComponent() {
   
       const [attendecePercent, setCompleteAttendecePercent] = useState([]);
         
-        useEffect(() => { 
-    
-          const dataFech = async () => {
-                const data = await ( 
-                  fetch('http://localhost:5000/api/attendences/calculatememberattendence', {   
-                    method: "GET", 
-                    'credentials': 'include',
-                  }
-                  )
-                );
-    
-              setCompleteAttendecePercent(data);
-          };
-    
-          dataFech();
-    
+      useEffect(() => { 
+  
+        const dataFech = async () => {
+
+            // verifica como acessa cookie <> console.log(cookie.get('token'));
+              
+            const data = await ( await fetch('http://localhost:5000/api/attendences/calculatememberattendence', {   
+                method: "GET", 
+                'credentials': 'include',
+                })).json()
+            
+                setCompleteAttendecePercent(data);
+        };
+  
+        dataFech();
+  
         }, []);
     
         return (

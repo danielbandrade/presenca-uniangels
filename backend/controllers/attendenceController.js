@@ -71,7 +71,6 @@ const registerAttendence = asyncHandler( async (req, res) => {
     
 });
     
-// TODO criar funcao para retornar presenca dos membros
 
 const getAttendenceLog = asyncHandler( async (req, res) => {
 

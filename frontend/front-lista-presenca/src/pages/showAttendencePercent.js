@@ -14,10 +14,10 @@ function showAttendencePercent() {
       useEffect(() => { 
   
         const dataFech = async () => {
-              const data = await ( 
-                await fetch('http://localhost:5000/api/attendences/calculatememberattendence'
-                )
-              ).json();
+            const data = await ( await fetch('http://localhost:5000/api/attendences/calculatememberattendence', {   
+              method: "GET", 
+              'credentials': 'include'
+            })).json()
   
             setCompleteAttendecePercent(data);
         };
@@ -51,7 +51,7 @@ function showAttendencePercent() {
               ))}
             </ul>
     
-            ) : null    }   
+            ) : null    }  
         
 
         <button className='my-2 bg-red-600 hover:bg-red-800 text-white font-bold py-2 px-4 rounded-full' onClick={() => router.push('/')}>
@@ -64,3 +64,17 @@ function showAttendencePercent() {
   };
 
 export default showAttendencePercent; 
+
+
+
+
+
+
+
+/* 
+
+
+
+
+
+*/
