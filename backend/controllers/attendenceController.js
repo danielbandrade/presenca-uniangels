@@ -14,6 +14,8 @@ const registerAttendence = asyncHandler( async (req, res) => {
     
     const attendedMembersObject =  req.body;
 
+    console.log('register working')
+
     //  Validation
     attendedMembersObject.forEach(member => {
         if(!member.name && !member.date &&  !member.isPresent) {
@@ -85,7 +87,6 @@ const getAttendenceLog = asyncHandler( async (req, res) => {
         throw new Error("Request Failed")
     }
 
-
 });
 
 
@@ -105,18 +106,11 @@ const deleteAttendenceLog = asyncHandler( async (req, res) => {
         throw new Error("Request Failed")
     }
 
-
-
 });
 
 
 const calculateMemberAttendence = asyncHandler( async (req, res) => {
-
-
-    // TODO ver como fazer query unindo com tabela de membros 
-
     
-
     const attendenceCalculation = await Attendence.aggregate([
         {
             $project: {

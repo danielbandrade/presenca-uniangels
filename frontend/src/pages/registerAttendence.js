@@ -15,8 +15,11 @@ export async function getServerSideProps() {
 
   // Busca os membros
 
-  const response = await fetch('http://localhost:5000/api/members/getmembers');
-  const membersList = await response.json();
+  const membersList = await ( await fetch('http://localhost:5000/api/members/getmembers', {   
+    method: "GET", 
+    'credentials': 'include',
+    })).json();
+  // const membersList = await response.json();
 
   return {
     props: {
@@ -44,6 +47,8 @@ export default function Attendence({ membersList }) {
   };
 
   const registerAttendence = async (event) => {
+
+    // TODO inserir aqui uma forma de só fazer carregar quando memberlist existir, possivelmente "??""
 
     const membersAttendenceRefactor = membersList.selectedObjects.map( memberIterate => {
       const {name} = memberIterate;

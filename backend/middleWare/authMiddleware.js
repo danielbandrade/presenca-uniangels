@@ -4,11 +4,11 @@ const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 
 const protect = asyncHandler( async (req,res,next) => {
+    
+    
     try{
 
         const token = req.cookies.token
-
-        console.log("passamos aqui");
 
         if(!token){
             res.status(401)
