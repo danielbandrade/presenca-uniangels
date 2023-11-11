@@ -19,7 +19,6 @@ export async function getServerSideProps() {
     method: "GET", 
     'credentials': 'include',
     })).json();
-  // const membersList = await response.json();
 
   return {
     props: {
@@ -121,7 +120,7 @@ export default function Attendence({ membersList }) {
         </div>
         <form className=" my-2">
           <ul>
-            {membersList.selectedObjects.map((member, index) => (
+            { membersList.selectedObjects ? ( membersList.selectedObjects.map((member, index) => (
               <li key={index} className="flex justify-between gap-x-6 py-5">
                 <p className="text-sm font-semibold leading-6 text-gray-900">{member.name}</p>    
                   <Checkbox
@@ -130,7 +129,7 @@ export default function Attendence({ membersList }) {
                     onChange={() => handleSelectItem(member)}
                   />
               </li>
-            ))}
+            )) ) : null }
           </ul>
           
           <button className="my-2 bg-red-600 hover:bg-red-800 text-white font-bold py-2 px-4 rounded-full" onClick={registerAttendence} >Registrar Presença</button>
