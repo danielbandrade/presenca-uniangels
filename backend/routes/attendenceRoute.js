@@ -11,9 +11,9 @@ const {
 const protect = require("../middleWare/authMiddleware");
 
 
-router.post("/register", registerAttendence);
+router.post("/register", protect, registerAttendence);
 router.get("/getattendencelog", protect, getAttendenceLog);
-router.post("/deleteattendencelog", deleteAttendenceLog);
+router.post("/deleteattendencelog", protect ,deleteAttendenceLog);
 router.get("/calculatememberattendence", protect ,calculateMemberAttendence);
 
 
