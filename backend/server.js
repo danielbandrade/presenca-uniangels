@@ -34,7 +34,7 @@ app.use("/api/attendences", attendenceRoute);
 
 // ROUTES
 app.get("/", (req,res) => {
-    res.send("Home Page");
+    res.send("Alow Gagau!");
 })
 
 
