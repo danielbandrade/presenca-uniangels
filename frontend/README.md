@@ -1,6 +1,9 @@
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
-## Getting Started
+## Presença UniAngels
+
+App to check if the UniAngels volunteers are present in our weekly meeting.
+
 
 First, run the development server:
 
