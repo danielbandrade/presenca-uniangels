@@ -10,9 +10,12 @@ const ShowMembers = () => {
 
       const dataFech = async () => {
             const data = await ( 
-              await fetch('http://localhost:5000/api/members/getmembers'
+              await fetch(process.env.NEXT_PUBLIC_API_URL+'/api/members/getmembers'
               )
             ).json();
+
+        //console.log(process.env.NEXT_PUBLIC_API_URL);
+        //console.log(API_URL);
 
         setMemberList(data);
       };
