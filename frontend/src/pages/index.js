@@ -1,42 +1,84 @@
-import Image from 'next/image';
-import { Inter } from 'next/font/google';
+import React, { useState } from 'react';
 import { useRouter } from 'next/router';
-import ShowMembers from '@/components/ShowMembersComponent';
 import HeaderApp from '@/components/HeaderApp';
+import Cookies from 'universal-cookie';
+import axios from 'axios';
 
 
-export default function Home() {
+// TODO Fazer a página de login funcionar
+// tentando fazer o login com axios funcionar https://sabe.io/blog/javascript-pass-cookies-fetch-axios
+// TODO P1 cadastrar membros do uniangels e fazer POC de preenchimento de presenca
+// TODO P2 fazer login passar o cookie de protecao para página de presenca usando js coockie 
 
-const router = useRouter();
+
+const Login = () => {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const router = useRouter();
+  const cookies = new Cookies({ path: '/' });
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    try {
+        const response =  await ( await  fetch('http://localhost:5000/api/users/login', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          credentials: 'same-origin',
+          body: JSON.stringify({ email, password }),
+        }) ).json()
+
+        if (response.token) {
+          // Handle successful login response here
+          console.log("login funcionou ");     
+          cookies.set('token', response.token); 
+          router.push('/registerAttendence');
+
+        } else {
+          // Handle login error response here
+          console.log('Login failed!');
+        }
+      } catch (error) {
+        // Handle error here
+        console.error('Error:', error);
+
+        
+      }
+
+
+  };
 
   return (
-    <main className={'h1'}>
-      <div>
-          <HeaderApp/>
-      </div>
-      <h1>Bem vindo</h1>
-      <ul>
-      <li>
-        <button className='my-2 bg-red-600 hover:bg-red-800 text-white font-bold py-2 px-4 rounded-full' onClick={() => router.push('/login')}>
-        Clique aqui para ir para o login
-        </button>
-      </li>
-      <li>
-        <button className='my-2 bg-red-600 hover:bg-red-800 text-white font-bold py-2 px-4 rounded-full' onClick={() => router.push('/registerAttendence')}>
-        Clique aqui para registrar presença
-        </button>
-      </li>
-      <li>
-        <button className='my-2 bg-red-600 hover:bg-red-800 text-white font-bold py-2 px-4 rounded-full' onClick={() => router.push('/showMembersPage')}>
-        Clique aqui para ver membros
-        </button>
-      </li>
-      <li>
-        <button className='my-2 bg-red-600 hover:bg-red-800 text-white font-bold py-2 px-4 rounded-full' onClick={() => router.push('/showAttendencePercent')}>
-        Clique aqui para ver presenças
-        </button>
-      </li>
-      </ul>
+    <main>
+
+    <div className='py-6'>
+      <div className='text-2xl red-600 font-bold'>Welcome, please login and you will see!</div>
+      <form onSubmit={handleSubmit}>
+        <div>
+          <label>Email:</label>
+          <input
+            type="email"
+            value={email}
+            className='my-2 mx-2  border-2 font-bold py-2 px-4 '
+            onChange={(e) => setEmail(e.target.value)}
+          />
+        </div>
+        <div>
+          <label>Password:</label>
+          <input
+            type="password"
+            className='my-2 mx-2 border-2 font-bold py-2 px-4 '
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+          />
+        </div>
+        <button type="submit">Login</button>
+      </form>
+    </div>
     </main>
-  )
+  );
 };
+
+export default Login;

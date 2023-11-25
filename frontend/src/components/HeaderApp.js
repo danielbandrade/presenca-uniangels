@@ -1,15 +1,16 @@
 import React, { useState } from 'react';
 import { HandRaisedIcon, Bars3BottomRightIcon, XMarkIcon } from '@heroicons/react/24/solid'
+import { useRouter } from 'next/router';
 
 const HeaderApp = () => {
     
     let Links =[
-        {name:"HOME",link:"/"},
-        {name:"REGISTRAR",link:"/registerAttendence"},
-        {name:"MEMBROS",link:"/showMembersPage"},
-        {name:"EXIBIR REGISTRO",link:"/showAttendencePercent"},
+        {name:"SHOW MEMBRES",link:"/showMembersPage"},
+        {name:"SHOW RECORDS",link:"/showAttendencePercent"},
       ];
     let [open, setOpen] = useState(false);
+
+    const router = useRouter(); 
 
     return (
         <div className='shadow-md w-full fixed top-0 left-0'>
@@ -17,7 +18,7 @@ const HeaderApp = () => {
             {/* logo section */}
             <div className='font-bold text-2xl cursor-pointer flex items-center gap-1'>
                 <HandRaisedIcon className='w-7 h-7 text-red-700'/>
-                <span>Presença UniAngels</span>
+                <span>UniAngels Attendence</span>
             </div>
             {/* Menu icon */}
             <div onClick={()=>setOpen(!open)} className='absolute right-8 top-6 cursor-pointer md:hidden w-7 h-7'>
@@ -33,7 +34,7 @@ const HeaderApp = () => {
                         <a href={link.link} className='text-gray-800 hover:text-blue-400 duration-500'>{link.name}</a>
                     </li>))
                 }
-                <button className='btn bg-red-600 text-white md:ml-8 font-semibold px-3 py-1 rounded duration-500 md:static'>Registrar</button>
+                <button className='btn bg-red-600 text-white md:ml-8 font-semibold px-3 py-1 rounded duration-500 md:static' onClick={() => router.push('/registerAttendence')}>Register</button>
             </ul>
             {/* button */}
            </div>
