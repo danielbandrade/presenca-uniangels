@@ -15,6 +15,7 @@ const ShowMembers = () => {
             ).json();
 
         console.log(process.env.NEXT_PUBLIC_API_URL);
+        console.log(process.env.NEXT_PUBLIC_HELLO);
         //console.log(API_URL);
 
         setMemberList(data);
