@@ -5,7 +5,7 @@ import { useRouter } from 'next/router';
 const HeaderApp = () => {
     
     let Links =[
-        {name:"SHOW MEMBRES",link:"/showMembersPage"},
+        {name:"SHOW MEMBERS",link:"/showMembersPage"},
         {name:"SHOW RECORDS",link:"/showAttendencePercent"},
       ];
     let [open, setOpen] = useState(false);
