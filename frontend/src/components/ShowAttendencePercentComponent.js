@@ -33,8 +33,8 @@ function ShowAttendencePercentComponent() {
           
           <div>
             <div className="px-4 sm:px-0">
-              <h3 className="text-base font-semibold leading-7 text-gray-900">Vonluntários de Startup UniAngels</h3>
-              <p className="mt-1 max-w-2xl text-sm leading-6 text-gray-500">Informações básicas.</p>
+              <h3 className="text-base font-semibold leading-7 text-gray-900">UniAngels Startup Team Volunteers</h3>
+              <p className="mt-1 max-w-2xl text-sm leading-6 text-gray-500">Basic Info</p>
             </div>
       
             {attendecePercent.attendenceCalculation ? (

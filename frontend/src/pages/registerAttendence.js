@@ -108,7 +108,7 @@ export default function Attendence({ membersList }) {
 
       <div className= "w-2/5 p-2 "> 
 
-        <h2 className=" my-2 text-1xl font-bold ">Lista de presença dos membros em {}</h2>
+        <h2 className=" my-2 text-1xl font-bold ">Please check the online members below:</h2>
         <div >
           <DatePicker 
             className="border-zinc-950 "

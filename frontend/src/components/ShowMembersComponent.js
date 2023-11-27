@@ -30,8 +30,8 @@ const ShowMembers = () => {
     <div>
 
       <div className="px-4 sm:px-0">
-        <h3 className="text-base font-semibold leading-7 text-gray-900">Vonluntários de Startup UniAngels</h3>
-        <p className="mt-1 max-w-2xl text-sm leading-6 text-gray-500">Informações básicas.</p>
+        <h3 className="text-base font-semibold leading-7 text-gray-900">UniAngels Startup Volunteers</h3>
+        <p className="mt-1 max-w-2xl text-sm leading-6 text-gray-500">Basic Info</p>
       </div>
 
     {membersList.selectedObjects ? (
@@ -49,7 +49,7 @@ const ShowMembers = () => {
                 <p className="text-sm leading-6 text-gray-900">Vonluntário</p>
                 {member.createdAt ? (
                   <p className="mt-1 text-xs leading-5 text-gray-500">
-                    Criado em: <time dateTime={member.createdAt}>{member.createdAt}</time>
+                    Created at: <time dateTime={member.createdAt}>{member.createdAt}</time>
                   </p>
                 ) : (
                   <div className="mt-1 flex items-center gap-x-1.5">

@@ -3,13 +3,7 @@ import { useRouter } from 'next/router';
 import HeaderApp from '@/components/HeaderApp';
 import Cookies from 'universal-cookie';
 import axios from 'axios';
-
-
-// TODO Fazer a página de login funcionar
-// tentando fazer o login com axios funcionar https://sabe.io/blog/javascript-pass-cookies-fetch-axios
-// TODO P1 cadastrar membros do uniangels e fazer POC de preenchimento de presenca
-// TODO P2 fazer login passar o cookie de protecao para página de presenca usando js coockie 
-
+import HeaderAppIndex from '@/components/HeaderAppIndex';
 
 const Login = () => {
   const [email, setEmail] = useState('');
@@ -24,7 +18,7 @@ const Login = () => {
     e.preventDefault();
 
     try {
-        const response =  await ( await  fetch(NEXT_PUBLIC_API_URL + '/api/users/login', {
+        const response =  await ( await  fetch(process.env.NEXT_PUBLIC_API_URL + '/api/users/login', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -55,6 +49,9 @@ const Login = () => {
 
   return (
     <main>
+
+
+    <HeaderAppIndex/>
 
     <div className='py-6'>
       <div className='text-2xl red-600 font-bold'>Welcome, please login and you will see!</div>
