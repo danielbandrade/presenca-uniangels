@@ -17,8 +17,8 @@ const Login = () => {
   const router = useRouter();
   const cookies = new Cookies({ path: '/' });
 
-  console.log(NEXT_PUBLIC_HELLO);
-  console.log(NEXT_PUBLIC_API_URL);
+  console.log(process.env.NEXT_PUBLIC_HELLO);
+  console.log(process.env.NEXT_PUBLIC_API_URL);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
