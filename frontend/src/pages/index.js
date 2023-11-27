@@ -17,11 +17,14 @@ const Login = () => {
   const router = useRouter();
   const cookies = new Cookies({ path: '/' });
 
+  console.log(NEXT_PUBLIC_HELLO);
+  console.log(NEXT_PUBLIC_API_URL);
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     try {
-        const response =  await ( await  fetch('http://localhost:5000/api/users/login', {
+        const response =  await ( await  fetch(NEXT_PUBLIC_API_URL + '/api/users/login', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
