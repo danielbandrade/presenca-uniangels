@@ -21,7 +21,7 @@ function loggedinStatus() {
 
             // verifica como acessa cookie <> console.log(cookie.get('token'));
               
-            const data = await fetch('http://localhost:5000/api/users/loggedin', {   
+            const data = await fetch(process.env.NEXT_PUBLIC_API_URL + '/api/users/loggedin', {   
                 method: "GET", 
                 'credentials': 'include',
                 })

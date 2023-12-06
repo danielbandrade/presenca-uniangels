@@ -14,7 +14,7 @@ function showAttendencePercent() {
       useEffect(() => { 
   
         const dataFech = async () => {
-            const data = await ( await fetch('http://localhost:5000/api/attendences/calculatememberattendence', {   
+            const data = await ( await fetch( process.env.NEXT_PUBLIC_API_URL +'/api/attendences/calculatememberattendence', {   
               method: "GET", 
               'credentials': 'include'
             })).json()

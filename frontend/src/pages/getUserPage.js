@@ -21,7 +21,7 @@ function getUser() {
 
             // verifica como acessa cookie <> console.log(cookie.get('token'));
               
-            const data = await ( await fetch('http://localhost:5000/api/users/getuser', {   
+            const data = await ( await fetch( process.env.NEXT_PUBLIC_API_URL + '/api/users/getuser', {   
                 method: "GET", 
                 'credentials': 'include',
                 })).json()

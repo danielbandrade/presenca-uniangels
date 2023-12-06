@@ -15,7 +15,7 @@ export async function getServerSideProps() {
 
   // Busca os membros
 
-  const membersList = await ( await fetch('http://localhost:5000/api/members/getmembers', {   
+  const membersList = await ( await fetch( process.env.NEXT_PUBLIC_API_URL + '/api/members/getmembers', {   
     method: "GET", 
     'credentials': 'include',
     })).json();
@@ -69,7 +69,7 @@ export default function Attendence({ membersList }) {
     console.log(membersAttendenceRefactor);
 
       try {
-          const response = await fetch('http://localhost:5000/api/attendences/register',{
+          const response = await fetch(process.env.NEXT_PUBLIC_API_URL +'/api/attendences/register',{
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',
@@ -108,7 +108,7 @@ export default function Attendence({ membersList }) {
 
       <div className= "w-2/5 p-2 "> 
 
-        <h2 className=" my-2 text-1xl font-bold ">Please check the online members below:</h2>
+        <h2 className=" my-2 text-1xl font-bold ">Please check the present members below:</h2>
         <div >
           <DatePicker 
             className="border-zinc-950 "
