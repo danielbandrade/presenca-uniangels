@@ -18,8 +18,10 @@ app.use(express. json());
 app.use(cookieParser());
 app.use(express.urlencoded({ extended: false }));
 app.use(bodyParser.json());
-app.use(cors({ origin: 'http://localhost:3000' , credentials: true, }));
-app.use(cors({ origin: 'https://precenca-uniangels-front.onrender.com' , credentials: true, }));
+app.use(cors({ origin:['http://localhost:3000','https://precenca-uniangels-front.onrender.com' ], credentials: true, }));
+
+// ver para configurar cors https://www.section.io/engineering-education/how-to-use-cors-in-nodejs-with-express/
+
 
 app.use(bodyParser.urlencoded({
     extended: true
