@@ -13,6 +13,8 @@ function getUser() {
   const router = useRouter();
   const cookie = new Cookies();
 
+  const secToken = cookie.get('token');
+
     const [getUser, setGetUser] = useState([]);
       
       useEffect(() => { 
@@ -22,6 +24,7 @@ function getUser() {
             const data = await ( await fetch( process.env.NEXT_PUBLIC_API_URL + '/api/users/getuser', {   
                 method: "GET", 
                 'credentials': 'include',
+                headers: { 'Set-Cookie': `token=${secToken}` }
                 })).json()
             
                 setGetUser(data);
