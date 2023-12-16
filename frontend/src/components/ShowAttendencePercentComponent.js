@@ -1,22 +1,25 @@
-import { cookies } from 'next/dist/client/components/headers';
 import { useRouter } from 'next/router';
 import React, {useState, useEffect} from 'react';
 const { format } = require('date-fns');
-
+import Cookies from 'universal-cookie';
 
 function ShowAttendencePercentComponent() {
 
     const router = useRouter();
   
+    const cookie = new Cookies();
+
       const [attendecePercent, setCompleteAttendecePercent] = useState([]);
         
       useEffect(() => { 
-  
+    
         const dataFech = async () => {
 
-            // verifica como acessa cookie <> console.log(cookie.get('token'));
+            // TODO autorizacao nao funciona
+
+            const secToken = cookie.get('token');
               
-            const data = await ( await fetch( process.env.NEXT_PUBLIC_API_URL + '/api/attendences/calculatememberattendence', {   
+            const data =  await ( await fetch( process.env.NEXT_PUBLIC_API_URL + '/api/attendences/calculatememberattendence', {   
                 method: "GET", 
                 'credentials': 'include',
                 })).json()
@@ -25,6 +28,7 @@ function ShowAttendencePercentComponent() {
         };
   
         dataFech();
+
   
         }, []);
     

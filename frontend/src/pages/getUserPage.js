@@ -18,8 +18,6 @@ function getUser() {
       useEffect(() => { 
   
         const dataFech = async () => {
-
-            // verifica como acessa cookie <> console.log(cookie.get('token'));
               
             const data = await ( await fetch( process.env.NEXT_PUBLIC_API_URL + '/api/users/getuser', {   
                 method: "GET", 

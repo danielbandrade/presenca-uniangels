@@ -8,7 +8,11 @@ const protect = asyncHandler( async (req,res,next) => {
     
     try{
 
+        // TODO ingerir token de diferentes formas
+
         const token = req.cookies.token
+
+        // const token = req.body.token
 
         if(!token){
             res.status(401)
