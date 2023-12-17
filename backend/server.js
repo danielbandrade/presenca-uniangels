@@ -18,9 +18,14 @@ app.use(express. json());
 app.use(cookieParser());
 app.use(express.urlencoded({ extended: false }));
 app.use(bodyParser.json());
-app.use(cors([{ origin:['http://localhost:3000',
+
+
+app.use(cors({credentials: true, origin: ['http://localhost:3000', 'https://precenca-uniangels-front.onrender.com', 'https://presenca-uniangels-r3p51moz9-danielbandrades-projects.vercel.app/']}));
+
+
+/*app.use(cors([{ origin:['http://localhost:3000',
 'https://precenca-uniangels-front.onrender.com', 
-'https://presenca-uniangels-r3p51moz9-danielbandrades-projects.vercel.app/','*' ], credentials: true, }]));
+'https://presenca-uniangels-r3p51moz9-danielbandrades-projects.vercel.app/' ], credentials: true}])); */
 
 // ver para configurar cors https://www.section.io/engineering-education/how-to-use-cors-in-nodejs-with-express/
 
