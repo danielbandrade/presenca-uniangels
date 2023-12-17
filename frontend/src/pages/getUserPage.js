@@ -20,6 +20,8 @@ function getUser() {
       useEffect(() => { 
   
         const dataFech = async () => {
+
+          console.log(secToken);
               
             const data = await ( await fetch( process.env.NEXT_PUBLIC_API_URL + '/api/users/getuser', {   
                 method: "GET", 
