@@ -11,6 +11,8 @@ const cookieParser = require("cookie-parser");
 
 const app = express();
 
+
+
 const PORT = process.env.PORT || 5000;
 
 // Minddlewares
@@ -20,9 +22,11 @@ app.use(express.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
 
-app.use(cors({credentials: true, origin: ['http://localhost:3000', 'https://precenca-uniangels-front.onrender.com', 'https://presenca-uniangels-r3p51moz9-danielbandrades-projects.vercel.app/','*']}));
+app.use(cors({credentials: true, origin: ['http://localhost:3000', 'https://precenca-uniangels-front.onrender.com', 'https://presenca-uniangels-r3p51moz9-danielbandrades-projects.vercel.app/']}));
 
 console.log('cors with *')
+
+// Investigar Same site Cookie
 
 /*app.use(cors([{ origin:['http://localhost:3000',
 'https://precenca-uniangels-front.onrender.com', 
