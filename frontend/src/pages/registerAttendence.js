@@ -8,12 +8,8 @@ import HeaderApp  from '@/components/HeaderApp';
 import ShowAttendencePercentComponent from '@/components/ShowAttendencePercentComponent';
 import { Checkbox } from '@material-tailwind/react';
 
-// TODO ajustar date picker https://reactdatepicker.com/
-// TODO ajustar essa tela para ficar amigável
 
 export async function getServerSideProps() {
-
-  // Busca os membros
 
   const membersList = await ( await fetch( process.env.NEXT_PUBLIC_API_URL + '/api/members/getmembers', {   
     method: "GET", 

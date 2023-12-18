@@ -15,7 +15,7 @@ function ShowAttendencePercentComponent() {
     
         const dataFech = async () => {
 
-            // TODO autorizacao nao funciona
+            // TODO autorizacao nao funciona EM PRODUCAO
 
             const secToken = cookie.get('token');
               

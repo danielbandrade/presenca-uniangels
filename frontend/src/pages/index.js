@@ -11,9 +11,6 @@ const Login = () => {
   const router = useRouter();
   const cookies = new Cookies({ path: '/' });
 
-  console.log(process.env.NEXT_PUBLIC_HELLO);
-  console.log(process.env.NEXT_PUBLIC_API_URL);
-
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -23,15 +20,14 @@ const Login = () => {
           headers: {
             'Content-Type': 'application/json',
           },
-          credentials: 'same-origin',
+          mode: 'cors' ,
           body: JSON.stringify({ email, password }),
         }) ).json()
 
         if (response.token) {
-          // Handle successful login response here
-          console.log("login funcionou ");     
-          cookies.set('token', response.token); 
-          router.push('/registerAttendence');
+          // Parece que a origem do problema esta aqui , pode ser esse cookie manua
+          cookies.set('token', response.token,  { 'path': '/', 'sameSite': 'none', 'secure': 'true', expires: new Date(Date.now() + 1000 * 84600)}); 
+          router.push('/getUserPage');
 
         } else {
           // Handle login error response here
