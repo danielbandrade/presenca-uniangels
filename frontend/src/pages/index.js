@@ -29,7 +29,7 @@ const Login = () => {
         if (response.token) {
           // Parece que a origem do problema esta aqui , pode ser esse cookie manua
           cookies.set('token', response.token); 
-          router.push('/getUserPage');
+          router.push('/registerAttendence');
 
         } else {
           // Handle login error response here

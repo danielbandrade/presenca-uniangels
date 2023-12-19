@@ -7,7 +7,6 @@ import "react-datepicker/dist/react-datepicker.css";
 import HeaderApp  from '@/components/HeaderApp';
 import ShowAttendencePercentComponent from '@/components/ShowAttendencePercentComponent';
 import { Checkbox } from '@material-tailwind/react';
-
 import Cookies from 'universal-cookie';
 
 
@@ -58,7 +57,7 @@ export default function Attendence() {
 
   const registerAttendence = async (event) => {
 
-    event.preventDefault();
+    //event.preventDefault();
 
     const membersAttendenceRefactor = membersList.selectedObjects.map( memberIterate => {
       const {name} = memberIterate;
@@ -146,6 +145,8 @@ export default function Attendence() {
           </ul>
           
           <button className="my-2 bg-red-600 hover:bg-red-800 text-white font-bold py-2 px-4 rounded-full" onClick={registerAttendence} >Registrar Presença</button>
+
+          
         </form>
       </div>
 

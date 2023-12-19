@@ -13,9 +13,7 @@ function loggedinStatus() {
   const router = useRouter();
   const cookie = new Cookies();
   const secToken = cookie.get('token');
-
-
-
+  
     const [loggedInStatus, setLoggedInStatus] = useState([]);
       
       useEffect(() => { 
