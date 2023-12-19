@@ -14,7 +14,7 @@ const protect = require("../middleWare/authMiddleware");
 router.post("/register", registerAttendence);
 router.get("/getattendencelog", protect, getAttendenceLog);
 router.post("/deleteattendencelog", protect ,deleteAttendenceLog);
-router.get("/calculatememberattendence", protect ,calculateMemberAttendence);
+router.get("/calculatememberattendence", protect , calculateMemberAttendence);
 
 
 
