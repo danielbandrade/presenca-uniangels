@@ -1,11 +1,14 @@
 import { useRouter } from 'next/router';
 import React, {useState, useEffect} from 'react';
 const { format } = require('date-fns');
-
+import Cookies from 'universal-cookie';
 
 // TODO ver como exibir membros sempre na mesma ordem 
 
 const ShowCompleteAttendenceLog = () => {
+
+  const cookie = new Cookies();
+  const secToken = cookie.get('token');
 
   const [completeAttendeceLog, setCompleteAttendeceLog] = useState([]);
     
@@ -13,7 +16,14 @@ const ShowCompleteAttendenceLog = () => {
 
       const dataFech = async () => {
             const data = await ( 
-              await fetch( process.env.NEXT_PUBLIC_API_URL + '/api/attendences/getAttendenceLog'
+              await fetch( process.env.NEXT_PUBLIC_API_URL + '/api/attendences/getAttendenceLog', {   
+                method: "GET", 
+                headers: {
+                  'Content-Type': 'application/json',
+                  'x-acess-token': secToken
+                },  
+                mode: 'cors'
+                }
               )
             ).json();
 

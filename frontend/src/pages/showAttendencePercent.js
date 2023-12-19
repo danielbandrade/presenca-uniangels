@@ -4,10 +4,15 @@ import { useRouter } from 'next/router';
 import React, {useState, useEffect} from 'react';
 import Datepicker from "react-tailwindcss-datepicker";
 import HeaderApp from '@/components/HeaderApp';
+import Cookies from 'universal-cookie';
+
 
 function showAttendencePercent() {
 
   const router = useRouter();
+  const cookie = new Cookies();
+
+  const secToken = cookie.get('token');
 
     const [attendecePercent, setCompleteAttendecePercent] = useState([]);
       
@@ -16,7 +21,11 @@ function showAttendencePercent() {
         const dataFech = async () => {
             const data = await ( await fetch( process.env.NEXT_PUBLIC_API_URL +'/api/attendences/calculatememberattendence', {   
               method: "GET", 
-              'credentials': 'include'
+                headers: {
+                  'Content-Type': 'application/json',
+                  'x-acess-token': secToken
+                },  
+                mode: 'cors' 
             })).json()
   
             setCompleteAttendecePercent(data);

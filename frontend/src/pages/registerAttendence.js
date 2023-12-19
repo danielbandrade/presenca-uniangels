@@ -8,14 +8,21 @@ import HeaderApp  from '@/components/HeaderApp';
 import ShowAttendencePercentComponent from '@/components/ShowAttendencePercentComponent';
 import { Checkbox } from '@material-tailwind/react';
 
+import Cookies from 'universal-cookie';
+
 
 export async function getServerSideProps() {
 
+  const cookie = new Cookies();
+  const secToken = cookie.get('token');
+
   const membersList = await ( await fetch( process.env.NEXT_PUBLIC_API_URL + '/api/members/getmembers', {   
     method: "GET", 
-    'credentials': 'include',
-    mode: 'cors' ,
-
+    headers: {
+      'Content-Type': 'application/json',
+      'x-acess-token': secToken
+    },  
+    mode: 'cors'
     })).json();
 
   return {

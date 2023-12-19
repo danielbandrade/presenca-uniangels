@@ -12,6 +12,9 @@ function loggedinStatus() {
 
   const router = useRouter();
   const cookie = new Cookies();
+  const secToken = cookie.get('token');
+
+
 
     const [loggedInStatus, setLoggedInStatus] = useState([]);
       
@@ -23,7 +26,11 @@ function loggedinStatus() {
               
             const data = await fetch(process.env.NEXT_PUBLIC_API_URL + '/api/users/loggedin', {   
                 method: "GET", 
-                'credentials': 'include',
+                headers: {
+                  'Content-Type': 'application/json',
+                  'x-acess-token': secToken
+                },  
+                mode: 'cors'
                 })
             
                 setLoggedInStatus(data);

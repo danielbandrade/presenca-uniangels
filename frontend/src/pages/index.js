@@ -28,7 +28,7 @@ const Login = () => {
 
         if (response.token) {
           // Parece que a origem do problema esta aqui , pode ser esse cookie manua
-          cookies.set('token', response.token,  { 'path': '/', 'sameSite': 'none', 'secure': 'true', expires: new Date(Date.now() + 1000 * 84600)}); 
+          cookies.set('token', response.token); 
           router.push('/getUserPage');
 
         } else {

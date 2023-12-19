@@ -8,23 +8,25 @@ function ShowAttendencePercentComponent() {
     const router = useRouter();
   
     const cookie = new Cookies();
+    const secToken = cookie.get('token');
 
       const [attendecePercent, setCompleteAttendecePercent] = useState([]);
         
       useEffect(() => { 
     
         const dataFech = async () => {
-
-            // TODO autorizacao nao funciona EM PRODUCAO
-
-            const secToken = cookie.get('token');
               
             const data =  await ( await fetch( process.env.NEXT_PUBLIC_API_URL + '/api/attendences/calculatememberattendence', {   
                 method: "GET", 
-                'credentials': 'include',
+                headers: {
+                  'Content-Type': 'application/json',
+                  'x-acess-token': secToken
+                },  
+                mode: 'cors' 
                 })).json()
             
                 setCompleteAttendecePercent(data);
+
         };
   
         dataFech();

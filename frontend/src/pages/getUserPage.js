@@ -14,6 +14,9 @@ function getUser() {
   const cookie = new Cookies();
 
   const secToken = cookie.get('token');
+  //const secToken = 'mySecretToken';
+
+  console.log(secToken);
 
     const [getUser, setGetUser] = useState([]);
       
@@ -25,8 +28,8 @@ function getUser() {
                 method: "GET", 
                 headers: {
                   'Content-Type': 'application/json',
+                  'x-acess-token': secToken
                 },  
-                credentials: 'include',
                 mode: 'cors' 
                 })).json()
             
