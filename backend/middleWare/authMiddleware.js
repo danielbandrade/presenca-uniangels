@@ -10,17 +10,22 @@ const protect = asyncHandler( async (req,res,next) => {
 
         // TODO ingerir token de diferentes formas
 
-        const token = req.cookies.token
+        // const token = req.cookies.token
 
-        // const token = req.body.token
+        const miracleToken = req.headers['x-acess-token'];
 
-        if(!token){
+        if(!miracleToken){
+            res.status(401)
+            throw new Error("Not autorized, please login")
+        }
+    
+        if(!miracleToken){
             res.status(401)
             throw new Error("Not autorized, please login")
         }
 
         // verify token
-        const verified = jwt.verify(token, process.env.JWT_SECRET);
+        const verified = jwt.verify(miracleToken, process.env.JWT_SECRET);
 
         // get user id from token
         user = await User.findById(verified.id).select("password");
