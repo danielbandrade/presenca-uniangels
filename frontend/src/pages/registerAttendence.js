@@ -1,5 +1,5 @@
 import { useRouter } from 'next/router';
-import React, { useState } from 'react';
+import React, {useState, useEffect} from 'react';
 const { format } = require('date-fns');
 import ShowMembers from '../components/ShowMembersComponent';
 import DatePicker from "react-datepicker";
@@ -11,33 +11,39 @@ import { Checkbox } from '@material-tailwind/react';
 import Cookies from 'universal-cookie';
 
 
-export async function getServerSideProps() {
+export default function Attendence() {
+
+  const router = useRouter();
+  const [membersAttendence, setSelectedMembers] = useState([]);
+
 
   const cookie = new Cookies();
   const secToken = cookie.get('token');
 
-  const membersList = await ( await fetch( process.env.NEXT_PUBLIC_API_URL + '/api/members/getmembers', {   
-    method: "GET", 
-    headers: {
-      'Content-Type': 'application/json',
-      'x-acess-token': secToken
-    },  
-    mode: 'cors'
-    })).json();
+  const [membersList, setMemberList] = useState([]);
+    
+    useEffect(() => { 
 
-  return {
-    props: {
-      membersList,
-    },
-  };
-}
+      const dataFech = async () => {
+            const data = await ( 
+              await fetch(process.env.NEXT_PUBLIC_API_URL+'/api/members/getmembers', {   
+                method: "GET", 
+                headers: {
+                  'Content-Type': 'application/json',
+                  'x-acess-token': secToken
+                },  
+                mode: 'cors'
+                }
+              )
+            ).json();
 
+        setMemberList(data);
+      };
 
+      dataFech();
 
-export default function Attendence({ membersList }) {
+    }, []);
 
-  const router = useRouter();
-  const [membersAttendence, setSelectedMembers] = useState([]);
 
   const handleSelectItem = (selectedMember) => {
 
@@ -52,7 +58,7 @@ export default function Attendence({ membersList }) {
 
   const registerAttendence = async (event) => {
 
-    // TODO inserir aqui uma forma de só fazer carregar quando memberlist existir, possivelmente "??""
+    event.preventDefault();
 
     const membersAttendenceRefactor = membersList.selectedObjects.map( memberIterate => {
       const {name} = memberIterate;
@@ -78,7 +84,9 @@ export default function Attendence({ membersList }) {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',
+              'x-acess-token': secToken
             },
+            mode: 'cors',
             body: JSON.stringify(membersAttendenceRefactor),
           })
           
