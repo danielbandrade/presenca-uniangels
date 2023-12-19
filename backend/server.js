@@ -25,7 +25,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
 
-app.use(cors({credentials: true, origin: ['http://localhost:3000', 'https://precenca-uniangels-front.onrender.com', 'https://presenca-uniangels-r3p51moz9-danielbandrades-projects.vercel.app/', 'http://127.0.0.1:3000'], allowedHeaders: ['Accept-Version', 'Authorization', 'Credentials', 'Content-Type'], exposedHeaders: ['Content-Type','X-Request-Id']}));
+app.use(cors({credentials: true, origin: ['http://localhost:3000', 'https://precenca-uniangels-front.onrender.com', 'https://presenca-uniangels-r3p51moz9-danielbandrades-projects.vercel.app/', 'http://127.0.0.1:3000'], allowedHeaders: ['Accept-Version', 'Authorization', 'Credentials', 'Content-Type'], exposedHeaders: ['X-Request-Id']}));
 
 
 app.use(bodyParser.urlencoded({
@@ -59,8 +59,8 @@ https
 		// Provide the private and public key to the server by reading each
 		// file's content with the readFileSync() method.
     {
-      key: fs.readFileSync("./utils/server.key"),
-      cert: fs.readFileSync("./utils/server.crt"),
+      key: fs.readFileSync("./server.key"),
+      cert: fs.readFileSync("./server.crt"),
     },
     app
   )

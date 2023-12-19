@@ -14,6 +14,8 @@ export async function getServerSideProps() {
   const membersList = await ( await fetch( process.env.NEXT_PUBLIC_API_URL + '/api/members/getmembers', {   
     method: "GET", 
     'credentials': 'include',
+    mode: 'cors' ,
+
     })).json();
 
   return {

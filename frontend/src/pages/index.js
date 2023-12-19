@@ -4,6 +4,7 @@ import HeaderApp from '@/components/HeaderApp';
 import Cookies from 'universal-cookie';
 import axios from 'axios';
 import HeaderAppIndex from '@/components/HeaderAppIndex';
+import { headers } from 'next/dist/client/components/headers';
 
 const Login = () => {
   const [email, setEmail] = useState('');
@@ -23,6 +24,7 @@ const Login = () => {
           mode: 'cors' ,
           body: JSON.stringify({ email, password }),
         }) ).json()
+
 
         if (response.token) {
           // Parece que a origem do problema esta aqui , pode ser esse cookie manua

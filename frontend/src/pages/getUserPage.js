@@ -26,8 +26,8 @@ function getUser() {
                 headers: {
                   'Content-Type': 'application/json',
                 },  
-                'credentials': 'include',
-                'mode': 'cors' 
+                credentials: 'include',
+                mode: 'cors' 
                 })).json()
             
                 setGetUser(data);
