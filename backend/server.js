@@ -25,7 +25,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
 
-const ESPECIAL_ORIGINS = ['http://localhost:3000', 'https://precenca-uniangels-front.onrender.com', '(.*)\.projects\.vercel\.app$', 'http://127.0.0.1:3000'];
+const ESPECIAL_ORIGINS = ['http://localhost:3000', 'https://precenca-uniangels-front.onrender.com', /\.vercel\.app$/, 'http://127.0.0.1:3000'];
 
 const ALOWED_HEADERS = ['Content-Type','x-acess-token'];
 
