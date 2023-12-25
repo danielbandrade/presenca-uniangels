@@ -13,13 +13,13 @@ import Cookies from 'universal-cookie';
 export default function Attendence() {
 
   const router = useRouter();
-  const [membersAttendence, setSelectedMembers] = useState([]);
-
-
   const cookie = new Cookies();
   const secToken = cookie.get('token');
-
+  const [membersAttendence, setSelectedMembers] = useState([]);
   const [membersList, setMemberList] = useState([]);
+  const [submitStatus, setSubmitStatus] = useState([]);
+  
+
     
     useEffect(() => { 
 
@@ -57,7 +57,7 @@ export default function Attendence() {
 
   const registerAttendence = async (event) => {
 
-    //event.preventDefault();
+    event.preventDefault();
 
     const membersAttendenceRefactor = membersList.selectedObjects.map( memberIterate => {
       const {name} = memberIterate;
@@ -76,8 +76,6 @@ export default function Attendence() {
       };
     }) 
 
-    console.log(membersAttendenceRefactor);
-
       try {
           const response = await fetch(process.env.NEXT_PUBLIC_API_URL +'/api/attendences/register',{
             method: 'POST',
@@ -91,9 +89,10 @@ export default function Attendence() {
           
           if (response.ok) {
             console.log('registro de presenca funcionou');
+            setSubmitStatus("Requisition worked!")
           } else {
             console.log('Registrou de presenca nao funcionou');
-            console.log(response);
+            setSubmitStatus("Requisition failed! " + response.json())
           }
         } 
       catch (error) {
@@ -112,21 +111,15 @@ export default function Attendence() {
         <HeaderApp/>
       </div>
 
-      <div className= "flex">
 
-      <div className= "w-2/5 p-2"> 
-        <ShowAttendencePercentComponent/>
-      </div>
-
-      <div className= "w-2/5 p-2 "> 
+      <div className= "pb-10"> 
 
         <h2 className=" my-2 text-1xl font-bold ">Please check the present members below:</h2>
         <div >
           <DatePicker 
-            className="border-zinc-950 "
+            className=" border-2 "
             dateFormat="dd/MM/yyyy"
             showIcon
-            border= "solid 2px pink" 
             selected={startDate} 
             onChange={(date) => setStartDate(date)} />
         </div>
@@ -146,11 +139,19 @@ export default function Attendence() {
           
           <button className="my-2 bg-red-600 hover:bg-red-800 text-white font-bold py-2 px-4 rounded-full" onClick={registerAttendence} >Registrar Presença</button>
 
+
+          <div>
+            
+          {submitStatus}
+          </div>
           
         </form>
-      </div>
+      </div>     
 
+      <div className= ""> 
+        <ShowAttendencePercentComponent/>
       </div>
+     
     </main>
   )
 }

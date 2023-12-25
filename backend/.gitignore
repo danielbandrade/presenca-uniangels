@@ -3,3 +3,4 @@
 /utils/server.crt
 server.csr
 server.key
+server.crt

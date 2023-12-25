@@ -68,7 +68,7 @@ const registerAttendence = asyncHandler( async (req, res) => {
         })
 
     }else{
-        throw new Error("Invalid Attendece Data")
+        throw new Error("Invalid Attendance Data")
     }
     
 });
