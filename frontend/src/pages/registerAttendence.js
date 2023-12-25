@@ -91,8 +91,9 @@ export default function Attendence() {
             console.log('registro de presenca funcionou');
             setSubmitStatus("Requisition worked!")
           } else {
+            const response_check = response.json();
             console.log('Registrou de presenca nao funcionou');
-            setSubmitStatus("Requisition failed! " + response.json())
+            setSubmitStatus("Requisition failed! ")
           }
         } 
       catch (error) {
