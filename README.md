@@ -1,6 +1,6 @@
 ### App de Registro de Presença
 
-Este é um projeto pessoal de aprendizado que visa implementar um sistema (back Node.js e front React ) de presença de membros de uma equipe em uma reunião.
+Este é um projeto pessoal de aprendizado que visa implementar um sistema (back Node.js e front Next.js) de presença de membros de uma equipe em uma reunião.
 
 As ações implementadas no sistema foram:
 - Cadastrar um usuário (email + senha)
