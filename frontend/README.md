@@ -3,7 +3,12 @@
 App to check if the UniAngels volunteers are present in our weekly meeting.
 
 
-First, run the development server:
+
+
+-------
+
+
+Versel instructions 
 
 ```bash
 npm run dev
