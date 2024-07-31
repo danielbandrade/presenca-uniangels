@@ -8,7 +8,7 @@ App to check if the UniAngels volunteers are present in our weekly meeting.
 -------
 
 
-Versel instructions 
+Next.js instructions:
 
 ```bash
 npm run dev
